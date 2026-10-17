@@ -422,6 +422,24 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLanguage(currentLang);
   selectIssueCategory('road');
   initGrievanceMap();
+
+  // Close mobile nav when clicking any nav link
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileNav();
+    });
+  });
+
+  // Close mobile nav when clicking outside header
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('navMenu');
+    const toggleBtn = document.getElementById('mobileNavToggle');
+    if (menu && menu.classList.contains('open')) {
+      if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+        closeMobileNav();
+      }
+    }
+  });
 });
 
 /**
@@ -1001,22 +1019,29 @@ function exportComplaintsToExcel() {
 }
 
 /**
- * 10. Mobile Navigation Toggle
+ * 10. Mobile Navigation Toggle & Drawer Controller
  */
 function toggleMobileNav() {
   const menu = document.getElementById('navMenu');
-  if (menu.style.display === 'flex') {
-    menu.style.display = 'none';
-  } else {
-    menu.style.display = 'flex';
-    menu.style.flexDirection = 'column';
-    menu.style.position = 'absolute';
-    menu.style.top = '100%';
-    menu.style.left = '0';
-    menu.style.width = '100%';
-    menu.style.background = 'var(--tvk-card-bg)';
-    menu.style.padding = '20px';
-    menu.style.borderBottom = '1px solid var(--tvk-dark-border)';
+  const toggleBtn = document.getElementById('mobileNavToggle');
+  if (!menu) return;
+
+  const isOpen = menu.classList.toggle('open');
+  if (toggleBtn) {
+    toggleBtn.textContent = isOpen ? '✕' : '☰';
+    toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+}
+
+function closeMobileNav() {
+  const menu = document.getElementById('navMenu');
+  const toggleBtn = document.getElementById('mobileNavToggle');
+  if (menu && menu.classList.contains('open')) {
+    menu.classList.remove('open');
+    if (toggleBtn) {
+      toggleBtn.textContent = '☰';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    }
   }
 }
 

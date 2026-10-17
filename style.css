@@ -85,6 +85,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
@@ -93,6 +95,7 @@ body {
   color: var(--tvk-text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -329,11 +332,26 @@ body {
 
 .mobile-nav-toggle {
   display: none;
-  background: transparent;
-  border: none;
+  background: var(--tvk-card-bg);
+  border: 1px solid var(--tvk-dark-border);
   color: var(--tvk-text-main);
-  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--tvk-radius-md);
+  font-size: 1.35rem;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: var(--tvk-transition);
+  touch-action: manipulation;
+  flex-shrink: 0;
+}
+
+.mobile-nav-toggle:hover,
+.mobile-nav-toggle:active {
+  background: var(--tvk-gold-subtle);
+  border-color: var(--tvk-gold);
+  color: var(--tvk-gold-hover);
 }
 
 /* Hero Section */
@@ -1875,11 +1893,17 @@ textarea.form-control {
   to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-/* Responsive Media Queries */
+/* ==========================================================================
+   COMPREHENSIVE MOBILE RESPONSIVE SYSTEM
+   Optimized for Phones (320px - 480px), Phablets (481px - 768px), & Tablets
+   ========================================================================== */
+
+/* Tablet & Intermediate Viewports (<= 1024px) */
 @media (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: 36px;
   }
   .hero-content {
     align-items: center;
@@ -1907,51 +1931,554 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 768px) {
-  .form-grid {
-    grid-template-columns: 1fr; /* Single column on tablet & mobile */
+/* Tablet & Mobile Nav Breakpoint (<= 860px) */
+@media (max-width: 860px) {
+  .brand-text p {
+    display: none; /* Hide long subtitle to prevent header blowout */
   }
-  .form-group.full-width {
-    grid-column: span 1;
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  /* Sleek slide-down mobile navigation drawer */
+  .nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--tvk-header-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px 20px 24px;
+    gap: 8px;
+    border-bottom: 2px solid var(--tvk-gold);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+    z-index: 998;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .nav-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-menu li {
+    width: 100%;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 12px 16px;
+    border-radius: var(--tvk-radius-md);
+    font-size: 0.95rem;
+    background: var(--tvk-card-bg);
+    border: 1px solid var(--tvk-dark-border);
+    transition: var(--tvk-transition);
+  }
+
+  .nav-link.active {
+    background: var(--tvk-gold-subtle);
+    border-color: var(--tvk-gold);
+    color: var(--tvk-gold-hover);
+  }
+
+  .nav-link::after {
+    display: none;
   }
 }
 
-@media (max-width: 640px) {
+/* Primary Mobile Breakpoint (<= 768px) */
+@media (max-width: 768px) {
+  /* Announcement bar */
   .top-announcement {
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
+    padding: 6px 12px;
+    font-size: 0.76rem;
     text-align: center;
   }
-  .nav-menu {
+
+  /* Header Controls */
+  .header-container {
+    padding: 8px 14px;
+    gap: 8px;
+  }
+
+  .brand-wrapper {
+    gap: 8px;
+  }
+
+  .brand-flag-img {
+    height: 38px;
+  }
+
+  .brand-text h1 {
+    font-size: 1.05rem;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  #themeText {
+    display: none; /* Icon-only theme button on mobile */
+  }
+
+  .btn-theme-toggle {
+    padding: 6px 10px;
+    min-height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .btn-lang-toggle {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    min-height: 36px;
+  }
+
+  /* Quick Report Button: Icon-only on mobile to keep header clean & single-row */
+  #btnReportText {
     display: none;
   }
-  .mobile-nav-toggle {
-    display: block;
+
+  .btn-report-quick {
+    padding: 8px 11px;
+    min-height: 36px;
+    gap: 0;
   }
+
+  .btn-report-quick .icon {
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 36px 16px 44px;
+    min-height: auto;
+  }
+
+  .hero-tag {
+    font-size: 0.78rem;
+    padding: 5px 12px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .hero-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
+    line-height: 1.25;
   }
-  .complaint-form-wrapper {
-    padding: 24px 18px;
+
+  .hero-subtitle {
+    font-size: 0.94rem;
+    line-height: 1.6;
   }
-  .form-submit-row {
+
+  .hero-hierarchy-pill {
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .pill-item {
+    font-size: 0.74rem;
+    padding: 5px 10px;
+  }
+
+  .hero-cta-group {
     flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+  }
+
+  .hero-visual-card {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+
+  .hero-floating-badge {
+    padding: 8px 12px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .badge-info h4 {
+    font-size: 0.88rem;
+  }
+
+  .badge-info p {
+    font-size: 0.72rem;
+  }
+
+  /* Stats Grid */
+  .stats-section {
+    padding: 0 16px;
+    margin-top: -20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px 10px;
+    gap: 10px;
+    border-radius: var(--tvk-radius-md);
+  }
+
+  .stat-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
+    flex-shrink: 0;
+  }
+
+  .stat-details h3 {
+    font-size: 1.3rem;
+  }
+
+  .stat-details p {
+    font-size: 0.72rem;
+  }
+
+  /* CRITICAL FIX: Issue Showcase Grid - 1 single full-width column on mobile */
+  .issue-showcase-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .issue-card {
+    border-radius: var(--tvk-radius-md);
+  }
+
+  .issue-thumb-wrapper {
+    height: 180px;
+  }
+
+  .issue-body {
+    padding: 16px;
+  }
+
+  .issue-body h3 {
+    font-size: 1.15rem;
+  }
+
+  .issue-body p {
+    font-size: 0.86rem;
+  }
+
+  /* Complaint Form */
+  .complaints-section {
+    padding: 44px 16px;
+  }
+
+  .section-header {
+    margin-bottom: 24px;
+  }
+
+  .section-title {
+    font-size: 1.7rem;
+  }
+
+  .section-desc {
+    font-size: 0.92rem;
+  }
+
+  .complaint-form-wrapper {
+    padding: 20px 14px;
+    border-radius: var(--tvk-radius-md);
+  }
+
+  .form-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .form-header-bar h3 {
+    font-size: 1.15rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr !important;
     gap: 16px;
   }
+
+  .form-group.full-width {
+    grid-column: span 1;
+  }
+
+  /* Ensure 16px font-size to prevent iOS Safari auto-zoom */
+  .form-control {
+    font-size: 16px !important;
+    padding: 11px 12px;
+  }
+
+  .location-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .btn-detect-gps {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 14px;
+  }
+
+  .grievance-map-container {
+    height: 220px;
+  }
+
+  .map-instruction-overlay {
+    font-size: 0.7rem;
+    padding: 4px 10px;
+    width: 90%;
+    text-align: center;
+    white-space: normal;
+  }
+
+  .file-upload-box {
+    padding: 16px 12px;
+  }
+
+  .form-submit-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .urgency-selector {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
   .btn-submit-complaint {
     width: 100%;
     justify-content: center;
+    padding: 13px 20px;
+    font-size: 0.98rem;
   }
+
+  /* Citizen / Admin Tracker */
+  .admin-tracker-section {
+    padding: 44px 16px;
+  }
+
+  .dashboard-card {
+    padding: 16px 12px;
+    border-radius: var(--tvk-radius-md);
+  }
+
+  .dashboard-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+  }
+
+  .toolbar-title h3 {
+    font-size: 1.15rem;
+  }
+
+  .toolbar-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+
+  .filter-select {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .btn-export-excel {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+
+  .table-responsive {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--tvk-radius-sm);
+  }
+
+  .complaints-table {
+    min-width: 580px; /* Enables horizontal scroll swipe smoothly without breaking container */
+    font-size: 0.82rem;
+  }
+
+  .complaints-table th,
+  .complaints-table td {
+    padding: 10px 12px;
+  }
+
+  /* Instagram Section */
+  .social-section {
+    padding: 44px 16px;
+  }
+
+  .insta-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .btn-follow-insta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* Leadership Section */
+  .leadership-section {
+    padding: 44px 16px;
+  }
+
+  .leadership-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+
+  .leader-img-box {
+    height: 280px;
+  }
+
+  .leader-info {
+    padding: 18px;
+  }
+
+  .pillars-row {
+    grid-template-columns: 1fr !important;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .pillar-box {
+    padding: 18px;
+  }
+
+  /* Manifesto Section */
+  .manifesto-banner-section {
+    padding: 36px 16px;
+  }
+
   .manifesto-box {
     flex-direction: column;
     text-align: center;
+    gap: 16px;
   }
+
+  .manifesto-text h2 {
+    font-size: 1.45rem;
+  }
+
+  .manifesto-text p {
+    font-size: 0.92rem;
+  }
+
+  .manifesto-btn {
+    width: 100%;
+  }
+
+  .manifesto-btn .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 40px 16px 20px 16px;
+  }
+
   .footer-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 24px;
   }
+
   .footer-bottom {
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     text-align: center;
+  }
+
+  /* Modal Dialog */
+  .modal-content {
+    padding: 22px 18px;
+    width: 95%;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+}
+
+/* Extra Small Phones (<= 380px) */
+@media (max-width: 380px) {
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .insta-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-text h1 {
+    font-size: 0.95rem;
+  }
+
+  .brand-flag-img {
+    height: 32px;
+  }
+
+  .btn-theme-toggle,
+  .btn-lang-toggle,
+  .btn-report-quick {
+    padding: 6px 8px;
   }
 }
