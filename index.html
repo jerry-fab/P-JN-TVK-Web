@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">தமிழக வெற்றிக் கழகம் | ஜோதி நகர் - தஞ்சாவூர் தொகுதி (TVK Jothi Nagar)</title>
+  <meta name="description" content="தமிழக வெற்றிக் கழகம் (TVK) ஜோதி நகர் வார்டு, தஞ்சாவூர் சட்டமன்றத் தொகுதி மற்றும் தஞ்சை மத்திய மாவட்ட மக்கள் குறைதீர்ப்பு மற்றும் வளர்ச்சி தளம்.">
+  
+  <!-- Google Web Fonts for High-Contrast Tamil & English Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Mukta+Malar:wght@400;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet CSS for 100% Free OpenStreetMap -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/WHISTLE-BADGE.png">
+</head>
+<body>
+
+  <!-- Top Emergency & Ward Announcement Bar -->
+  <div class="top-announcement">
+    <div class="ticker-content">
+      <span class="badge-live" data-i18n="badge_live">LIVE</span>
+      <span id="announcement-text" data-i18n="announcement_text">📢 ஜோதி நகர் வார்டு மக்கள் குறைதீர்ப்பு மையம் செயல்பாட்டில் உள்ளது | 24/7 அவசர உதவி: 04362-234567</span>
+    </div>
+    <div class="quick-links">
+      <a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener">📸 @jodhinagartvk</a>
+      <a href="https://tvkmanifesto2026.com/" target="_blank" rel="noopener" data-i18n="link_state_manifesto">📜 மாநில தேர்தல் அறிக்கை 2026</a>
+    </div>
+  </div>
+
+  <!-- Main Sticky Header & Navigation -->
+  <header class="main-header" id="mainHeader">
+    <div class="header-container">
+      <a href="#" class="brand-wrapper">
+        <img src="assets/images/Flag-with-Transparent-BG-rj4zj7mv8vzgjmzsqefwigezqefxrsuwjpp48v2qpc.png" alt="TVK Flag" class="brand-flag-img">
+        <div class="brand-text">
+          <h1 data-i18n="brand_title">த.வெ.க <span>ஜோதி நகர்</span></h1>
+          <p data-i18n="brand_subtitle">தஞ்சாவூர் சட்டமன்றத் தொகுதி | தஞ்சை மத்திய மாவட்டம்</p>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#home" class="nav-link active" data-i18n="nav_home">முகப்பு</a></li>
+          <li><a href="#complaints" class="nav-link" data-i18n="nav_complaints">குறைதீர்ப்பு (Grievances)</a></li>
+          <li><a href="#dashboard" class="nav-link" data-i18n="nav_tracker">புகார் நிலை (Tracker)</a></li>
+          <li><a href="#instagram" class="nav-link" data-i18n="nav_media">சமூக ஊடகம் (Media)</a></li>
+          <li><a href="#leadership" class="nav-link" data-i18n="nav_leadership">தலைமை & கொள்கை</a></li>
+          <li><a href="#manifesto" class="nav-link" data-i18n="nav_manifesto">தேர்தல் அறிக்கை</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- DARK / LIGHT MODE SWITCH -->
+        <button class="btn-theme-toggle" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+          <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+        </button>
+        <button class="btn-lang-toggle" id="langToggleBtn" onclick="toggleLanguage()">English</button>
+        <button class="btn-report-quick" onclick="scrollToComplaints('all')">
+          <span class="icon">!</span>
+          <span id="btnReportText" data-i18n="btn_quick_report">புகார் பதிவு செய்க</span>
+        </button>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation" onclick="toggleMobileNav()">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-bg-accent"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <img src="assets/images/WHISTLE-BADGE.png" alt="Whistle Badge">
+          <span data-i18n="hero_tag">வெற்றித் தமிழ்நாடு 2026 | நம் காலம் வருகிறது!</span>
+        </div>
+
+        <h1 class="hero-title" data-i18n="hero_title">
+          மக்களுக்கான சேவை <br>
+          <span class="highlight-gold">ஜோதி நகர்</span> <span class="highlight-red">வளர்ச்சிப் பாதை</span>
+        </h1>
+
+        <p class="hero-subtitle" data-i18n="hero_subtitle">
+          தஞ்சாவூர் தொகுதி ஜோதி நகர் பகுதி வாழ் மக்களின் குடிமைப் பிரச்சனைகளுக்கு உடனுக்குடன் தீர்வு காணவும், தூய்மையான, பாதுகாப்பான, நவீன வார்டை உருவாக்கவும் நாம் கரம்கோர்ப்போம்.
+        </p>
+
+        <div class="hero-hierarchy-pill">
+          <span class="pill-item" data-i18n="pill_corp">மண்டலம்: <strong>தஞ்சை மாநகராட்சி</strong></span>
+          <span class="pill-item" data-i18n="pill_const">தொகுதி: <strong>தஞ்சாவூர் (174)</strong></span>
+          <span class="pill-item" data-i18n="pill_ward">வார்டு: <strong>ஜோதி நகர்</strong></span>
+          <span class="pill-item" data-i18n="pill_leader">தலைமை: <strong>தளபதி விஜய்</strong></span>
+        </div>
+
+        <div class="hero-cta-group">
+          <button class="btn-primary" onclick="scrollToComplaints('all')">
+            <span data-i18n="hero_btn_report">📢 உங்கள் பகுதி புகாரைப் பதியுங்கள்</span>
+          </button>
+          <a href="#manifesto" class="btn-secondary">
+            <span data-i18n="hero_btn_manifesto">🗳️ 2026 வார்டு கோரிக்கைகள்</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual-card">
+        <div class="hero-image-frame">
+          <img src="assets/images/vijay.jpg" alt="TVK Leader Thalapathy Vijay">
+          <div class="hero-floating-badge">
+            <div class="badge-info">
+              <h4 data-i18n="hero_badge_name">தளபதி விஜய்</h4>
+              <p data-i18n="hero_badge_role">நிறுவனர் & தலைவர் - த.வெ.க</p>
+            </div>
+            <div class="badge-seal">TVK</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Ward Metrics & Resolution Strip -->
+  <section class="stats-strip">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">✅</div>
+        <div class="stat-details">
+          <h3 id="statResolvedCount">142+</h3>
+          <p data-i18n="stat_resolved_text">தீர்க்கப்பட்ட மக்கள் புகார்கள்</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">🛣️</div>
+        <div class="stat-details">
+          <h3>18</h3>
+          <p data-i18n="stat_roads_text">சாலை & குழி சீரமைப்பு பணிகள்</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">💡</div>
+        <div class="stat-details">
+          <h3>56</h3>
+          <p data-i18n="stat_lights_text">புதிய தெருவிளக்குகள் & பழுது நீக்கம்</p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-details">
+          <h3>280+</h3>
+          <p data-i18n="stat_volunteers_text">ஜோதி நகர் த.வெ.க தீவிர தொண்டர்கள்</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       USER REQUIREMENT: REPORT COMPLAINTS WITH DYNAMIC ISSUE PHOTOS IN BACKGROUND
+       ========================================================================== -->
+  <section class="complaints-section" id="complaints">
+    <!-- Dynamic Ambient Backgrounds (Road, Garbage, Drainage, Other) -->
+    <div class="complaints-ambient-bg" id="ambientBgContainer">
+      <img src="assets/images/road_issue.jpg" class="ambient-img" id="bg-road" alt="Road Damage">
+      <img src="assets/images/garbage_issue.jpg" class="ambient-img" id="bg-garbage" alt="Garbage Overflow">
+      <img src="assets/images/drainage_issue.jpg" class="ambient-img" id="bg-drainage" alt="Drainage Blockage">
+      <img src="assets/images/other_civic_issue.jpg" class="ambient-img" id="bg-other" alt="Other Civic Issues">
+      <div class="ambient-overlay"></div>
+    </div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="complaints_badge">மக்கள் குறைதீர்ப்பு மையம்</span>
+        <h2 class="section-title" data-i18n="complaints_title">ஜோதி நகர் வார்டு <span>பிரச்சனைகளை சுட்டிக்காட்டுங்கள்</span></h2>
+        <p class="section-desc" data-i18n="complaints_desc">
+          கீழே உள்ள முக்கிய பிரச்சனை வகையைத் தேர்வு செய்யுங்கள். நீங்கள் தேர்வு செய்யும் போது பின்னணியில் அதற்கான புகைப்பட ஆதாரம் மற்றும் தீவிரத்தன்மை மாறும்.
+        </p>
+      </div>
+
+      <!-- 4 Major Issues Highlight Selector Grid (Road, Garbage, Drainage, Other) -->
+      <div class="issue-showcase-grid">
+        <!-- 1. Road Damage Card -->
+        <div class="issue-card active selected" id="card-road" onclick="selectIssueCategory('road')">
+          <div class="issue-thumb-wrapper">
+            <img src="assets/images/road_issue.jpg" alt="Damaged Road in Jothi Nagar">
+            <span class="issue-urgency-tag" data-i18n="road_urgency">முன்னுரிமை: அதிதீவிரம்</span>
+          </div>
+          <div class="issue-details">
+            <div class="issue-header-row">
+              <span class="issue-icon-circle">🛣️</span>
+              <h3 data-i18n="road_card_title">உடைந்த சாலைகள் & பள்ளங்கள்</h3>
+            </div>
+            <p data-i18n="road_card_desc">ஜோதி நகர் மெயின் ரோடு & குறுக்குத் தெருக்களில் குண்டும் குழியுமாக உள்ள சாலைகள், மழைநீர் தேக்கம், இருசக்கர வாகன விபத்து அபாயம்.</p>
+            <div class="issue-meta-row">
+              <span class="stat-resolved" data-i18n="road_stat_text">✓ 18 தீர்க்கப்பட்டது</span>
+              <span class="select-indicator" data-i18n="card_select_hint">தேர்வு செய்ய சொடுக்கவும் 👉</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Garbage Issue Card -->
+        <div class="issue-card" id="card-garbage" onclick="selectIssueCategory('garbage')">
+          <div class="issue-thumb-wrapper">
+            <img src="assets/images/garbage_issue.jpg" alt="Garbage Overflow in Jothi Nagar">
+            <span class="issue-urgency-tag" data-i18n="garbage_urgency">சுகாதார அவசரம்</span>
+          </div>
+          <div class="issue-details">
+            <div class="issue-header-row">
+              <span class="issue-icon-circle">🗑️</span>
+              <h3 data-i18n="garbage_card_title">குப்பைக் கூளம் & துர்நாற்றம்</h3>
+            </div>
+            <p data-i18n="garbage_card_desc">தெருமுனை குப்பைத் தொட்டிகள் நிரம்பி வழிதல், பிளாஸ்டிக் கழிவுகள் தேக்கம், உரிய நேரத்தில் குப்பை வண்டி வராத பிரச்சனை.</p>
+            <div class="issue-meta-row">
+              <span class="stat-resolved" data-i18n="garbage_stat_text">✓ 42 தீர்க்கப்பட்டது</span>
+              <span class="select-indicator" data-i18n="card_select_hint">தேர்வு செய்ய சொடுக்கவும் 👉</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Drainage Issue Card -->
+        <div class="issue-card" id="card-drainage" onclick="selectIssueCategory('drainage')">
+          <div class="issue-thumb-wrapper">
+            <img src="assets/images/drainage_issue.jpg" alt="Drainage Blockage in Jothi Nagar">
+            <span class="issue-urgency-tag" data-i18n="drainage_urgency">மழைக்கால அபாயம்</span>
+          </div>
+          <div class="issue-details">
+            <div class="issue-header-row">
+              <span class="issue-icon-circle">🌊</span>
+              <h3 data-i18n="drainage_card_title">கழிவுநீர் வடிகால் அடைப்பு</h3>
+            </div>
+            <p data-i18n="drainage_card_desc">திறந்தவெளி சாக்கடைகள் நிரம்பி சாலையில் கழிவுநீர் பெருக்கெடுத்தல், கொசு உற்பத்தி, தொற்றுநோய் பரவும் தீவிர அபாயம்.</p>
+            <div class="issue-meta-row">
+              <span class="stat-resolved" data-i18n="drainage_stat_text">✓ 35 தீர்க்கப்பட்டது</span>
+              <span class="select-indicator" data-i18n="card_select_hint">தேர்வு செய்ய சொடுக்கவும் 👉</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Other Civic Issues Card -->
+        <div class="issue-card" id="card-other" onclick="selectIssueCategory('other')">
+          <div class="issue-thumb-wrapper">
+            <img src="assets/images/other_civic_issue.jpg" alt="Other Civic Issues in Jothi Nagar">
+            <span class="issue-urgency-tag" style="background: rgba(37, 99, 235, 0.9);" data-i18n="other_urgency">பொது நலம் & இதர</span>
+          </div>
+          <div class="issue-details">
+            <div class="issue-header-row">
+              <span class="issue-icon-circle" style="background: rgba(37, 99, 235, 0.15); color: #3b82f6;">📌</span>
+              <h3 data-i18n="other_card_title">இதர பொதுப் பிரச்சனைகள்</h3>
+            </div>
+            <p data-i18n="other_card_desc">குடிநீர் விநியோகம், தெருவிளக்கு பழுது, மின்சாரக் கம்பி, மரக்கிளை அச்சுறுத்தல் அல்லது உங்கள் வார்டு சார்ந்த தனிப்பட்ட பொதுப் பிரச்சனை.</p>
+            <div class="issue-meta-row">
+              <span class="stat-resolved" data-i18n="other_stat_text">✓ 54 தீர்க்கப்பட்டது</span>
+              <span class="select-indicator" data-i18n="card_select_hint">தேர்வு செய்ய சொடுக்கவும் 👉</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Complaint Submission Form -->
+      <div class="complaint-form-wrapper">
+        <div class="form-header-bar">
+          <h3>
+            <span>📝</span> <span data-i18n="form_heading">புதிய குறைதீர்ப்பு மனு பதிவு</span>
+          </h3>
+          <span class="active-issue-chip" id="activeCategoryBadge">தேர்ந்தெடுக்கப்பட்ட வகை: சாலை பிரச்சனை (Road Issue)</span>
+        </div>
+
+        <form id="complaintForm" onsubmit="handleComplaintSubmit(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="citizenName"><span data-i18n="label_name">உங்கள் பெயர் (Full Name)</span> <span class="required">*</span></label>
+              <input type="text" id="citizenName" class="form-control" placeholder="எ.கா: சுந்தர்ராஜ்" data-i18n-placeholder="placeholder_name" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="citizenPhone"><span data-i18n="label_phone">கைபேசி எண் (Mobile Number)</span> <span class="required">*</span></label>
+              <input type="tel" id="citizenPhone" class="form-control" placeholder="10 இலக்க எண்" data-i18n-placeholder="placeholder_phone" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="complaintCategory"><span data-i18n="label_category">பிரச்சனை வகை (Issue Category)</span> <span class="required">*</span></label>
+              <select id="complaintCategory" class="form-control" onchange="syncCategorySelect(this.value)" required>
+                <option value="road" selected data-i18n="opt_road">🛣️ உடைந்த சாலைகள் / குண்டும் குழியும் (Road Damage)</option>
+                <option value="garbage" data-i18n="opt_garbage">🗑️ குப்பை தேக்கம் & சுகாதாரம் (Garbage / Sanitation)</option>
+                <option value="drainage" data-i18n="opt_drainage">🌊 கழிவுநீர் வடிகால் அடைப்பு (Drainage Overflow)</option>
+                <option value="streetlight" data-i18n="opt_streetlight">💡 தெருவிளக்கு பழுது (Streetlight Outage)</option>
+                <option value="water" data-i18n="opt_water">🚰 குடிநீர் விநியோக குறைபாடு (Drinking Water)</option>
+                <option value="other" data-i18n="opt_other">📌 இதர பொது பிரச்சனைகள் (Other Civic Needs)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="streetLocation"><span data-i18n="label_street">ஜோதி நகர் பகுதி / தெரு (Street Location)</span> <span class="required">*</span></label>
+              <select id="streetLocation" class="form-control" required>
+                <option value="" disabled selected data-i18n="opt_select_street">உங்கள் தெருவைத் தேர்வு செய்யவும்</option>
+                <option value="ஜோதி நகர் மெயின் ரோடு (Main Road)">ஜோதி நகர் மெயின் ரோடு (Main Road)</option>
+                <option value="1-வது குறுக்குத் தெரு (1st Cross)">1-வது குறுக்குத் தெரு (1st Cross)</option>
+                <option value="2-வது குறுக்குத் தெரு (2nd Cross)">2-வது குறுக்குத் தெரு (2nd Cross)</option>
+                <option value="3-வது குறுக்குத் தெரு (3rd Cross)">3-வது குறுக்குத் தெரு (3rd Cross)</option>
+                <option value="விநாயகர் கோவில் தெரு (Temple Street)">விநாயகர் கோவில் தெரு (Temple Street)</option>
+                <option value="பள்ளிவாசல் தெரு (Mosque Street)">பள்ளிவாசல் தெரு (Mosque Street)</option>
+                <option value="பேருந்து நிறுத்தம் பகுதி (Bus Stop Area)">பேருந்து நிறுத்தம் பகுதி (Bus Stop Area)</option>
+                <option value="ரயில்வே கேட் அருகில் (Railway Gate Side)">ரயில்வே கேட் அருகில் (Railway Gate Side)</option>
+                <option value="வடக்கு பகுதி குடியிருப்பு (North Extn)">வடக்கு பகுதி குடியிருப்பு (North Extn)</option>
+              </select>
+            </div>
+
+            <!-- Dynamic Custom Issue Input when 'Other' is chosen -->
+            <div class="form-group full-width" id="customIssueGroup" style="display: none;">
+              <label class="form-label" for="customIssueTitle"><span data-i18n="label_custom_issue">குறிப்பிட்ட பிரச்சனை வகை / தலைப்பு (Specify Your Issue Topic)</span> <span class="required">*</span></label>
+              <input type="text" id="customIssueTitle" class="form-control" placeholder="எ.கா: குடிநீர் பற்றாக்குறை / மின்கம்பி தொங்குதல் / பொது கழிப்பிடம்" data-i18n-placeholder="placeholder_custom_issue">
+            </div>
+
+            <!-- Interactive OpenStreetMap Location Picker (Leaflet.js + OSM - 100% Free & Open-Source) -->
+            <div class="form-group full-width location-picker-group">
+              <div class="location-header-row">
+                <label class="form-label">
+                  <span>📍</span>
+                  <span data-i18n="label_map_picker">வரைபடத்தில் இருப்பிடத்தைக் குறிக்கவும் (Pin Location on Map)</span>
+                  <span class="optional-tag" data-i18n="optional_tag">(விரும்பினால் / Optional)</span>
+                </label>
+                <button type="button" class="btn-detect-gps" id="btnDetectGps" onclick="detectUserLocation()">
+                  <span class="gps-icon">🎯</span> <span id="gpsBtnText" data-i18n="btn_gps_text">என் தற்போதைய இடம் (Use GPS)</span>
+                </button>
+              </div>
+              
+              <div class="map-wrapper">
+                <div id="grievanceMap" class="grievance-map-container"></div>
+                <div class="map-instruction-overlay">
+                  <span data-i18n="map_hint_text">வரைபடத்தில் கிளிக் செய்து சரியான இடத்தை தேர்வு செய்யவும்</span>
+                </div>
+              </div>
+
+              <div class="location-coords-status">
+                <span class="coord-dot" id="coordDot"></span>
+                <span id="coordDisplay" data-i18n="map_initial_status">ஜோதி நகர் மையம் (Jothi Nagar Center) - 10.7531° N, 79.1230° E</span>
+              </div>
+
+              <input type="hidden" id="selectedLat" name="selectedLat" value="10.7531">
+              <input type="hidden" id="selectedLng" name="selectedLng" value="79.1230">
+              <input type="hidden" id="hasSelectedLocation" name="hasSelectedLocation" value="false">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="complaintDesc"><span data-i18n="label_desc">பிரச்சனை குறித்த விரிவான தகவல் (Problem Description)</span> <span class="required">*</span></label>
+              <textarea id="complaintDesc" class="form-control" placeholder="பிரச்சனையின் தன்மை, எத்தனை நாட்களாக இந்த நிலை உள்ளது, குறிப்பிட்ட அடையாளம் போன்றவற்றை எழுதவும்..." data-i18n-placeholder="placeholder_desc" required></textarea>
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" data-i18n="label_photo">புகைப்பட ஆதாரம் இணைக்கவும் (Optional Photo Proof)</label>
+              <div class="file-upload-box" id="dropArea">
+                <input type="file" id="issuePhotoInput" accept="image/*" onchange="handleImagePreview(event)">
+                <div class="file-upload-content">
+                  <span class="upload-icon">📸</span>
+                  <p data-i18n="photo_box_text"><strong>புகைப்படத்தை தேர்ந்தெடுக்க இங்கே கிளிக் செய்யவும்</strong> அல்லது இழுத்து விடவும் (Max 5MB)</p>
+                  <div class="file-preview-strip" id="previewStrip"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-submit-row">
+            <div class="urgency-selector">
+              <span style="font-size: 0.85rem; color: var(--tvk-text-muted); font-weight: 600;" data-i18n="label_severity">தீவிரத்தன்மை:</span>
+              <label class="urgency-option"><input type="radio" name="severity" value="High" checked> <span data-i18n="severity_high">🔴 அவசரம் (High)</span></label>
+              <label class="urgency-option"><input type="radio" name="severity" value="Medium"> <span data-i18n="severity_medium">🟡 நடுத்தரம் (Medium)</span></label>
+            </div>
+
+            <button type="submit" class="btn-submit-complaint">
+              <span data-i18n="btn_submit_text">புகாரை சமர்ப்பிக்கவும்</span>
+              <span>➔</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       USER REQUIREMENT: EXCEL / DB EXPORT & WARD OFFICER TRACKER DASHBOARD
+       ========================================================================== -->
+  <section class="admin-tracker-section" id="dashboard">
+    <div class="section-container">
+      <div class="dashboard-card">
+        <div class="dashboard-toolbar">
+          <div class="toolbar-title">
+            <h3 data-i18n="tracker_title">📊 ஜோதி நகர் வார்டு புகார் கண்காணிப்பகம் (Grievance Tracker)</h3>
+            <p data-i18n="tracker_subtitle">வார்டு செயலாளர்கள் மற்றும் தன்னார்வலர்களுக்கான நேரடி தரவுத்தளம் (Local Storage & Instant Excel Export)</p>
+          </div>
+
+          <div class="toolbar-actions">
+            <div class="search-box">
+              <span class="icon">🔍</span>
+              <input type="text" id="searchInput" placeholder="பெயர் அல்லது தெரு தேடுக..." data-i18n-placeholder="search_placeholder" onkeyup="filterComplaintsTable()">
+            </div>
+
+            <select class="filter-select" id="statusFilter" onchange="filterComplaintsTable()">
+              <option value="all" data-i18n="filter_all">அனைத்து நிலைகள்</option>
+              <option value="புதியது" data-i18n="filter_pending">புதியது (Pending)</option>
+              <option value="செயல்பாட்டில்" data-i18n="filter_in_progress">செயல்பாட்டில் (In Progress)</option>
+              <option value="தீர்க்கப்பட்டது" data-i18n="filter_resolved">தீர்க்கப்பட்டது (Resolved)</option>
+            </select>
+
+            <!-- EXCEL EXPORT BUTTON -->
+            <button class="btn-export-excel" onclick="exportComplaintsToExcel()">
+              <span data-i18n="btn_export_excel">📥 Excel வடிவில் பதிவிறக்கு (.CSV)</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="complaints-table" id="complaintsTable">
+            <thead>
+              <tr>
+                <th data-i18n="th_ref_id">குறிப்பு எண் (Ref ID)</th>
+                <th data-i18n="th_date">தேதி (Date)</th>
+                <th data-i18n="th_citizen">மனுதாரர் (Citizen)</th>
+                <th data-i18n="th_street">தெரு / பகுதி (Street)</th>
+                <th data-i18n="th_category">பிரச்சனை வகை (Category)</th>
+                <th data-i18n="th_urgency">தீவிரம் (Urgency)</th>
+                <th data-i18n="th_status">நிலை (Status)</th>
+                <th data-i18n="th_action">செயல் (Action)</th>
+              </tr>
+            </thead>
+            <tbody id="complaintsTableBody">
+              <!-- Dynamically populated via app.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INSTAGRAM FEED & GALLERY SHOWCASE (@jodhinagartvk)
+       ========================================================================== -->
+  <section class="instagram-showcase-section" id="instagram">
+    <div class="section-container">
+      <div class="insta-header-bar">
+        <div class="insta-profile-meta">
+          <img src="assets/images/WHISTLE-BADGE.png" alt="Jodhinagar TVK Avatar" class="insta-avatar">
+          <div class="insta-info">
+            <h3>@jodhinagartvk</h3>
+            <p data-i18n="insta_subtitle">ஜோதி நகர் த.வெ.க அதிகாரப்பூர்வ இன்ஸ்டாகிராம் பக்கம் | தஞ்சாவூர்</p>
+          </div>
+        </div>
+
+        <a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener" class="btn-follow-insta">
+          <span data-i18n="btn_follow_insta">📷 Instagram-ல் பின்தொடரவும்</span>
+          <span>↗</span>
+        </a>
+      </div>
+
+      <div class="insta-grid">
+        <div class="insta-post-card">
+          <img src="assets/images/1.png" alt="TVK Welfare Distribution">
+          <div class="insta-hover-overlay">
+            <p data-i18n="insta_card_1">ஜோதி நகர் பகுதியில் த.வெ.க சார்பில் கல்வி உபகரணங்கள் மற்றும் நலத்திட்ட உதவிகள் வழங்கப்பட்டது.</p>
+            <span class="insta-tag">#TVKJothiNagar #ThalapathyVijay</span>
+          </div>
+        </div>
+
+        <div class="insta-post-card">
+          <img src="assets/images/3.png" alt="TVK Youth Wing Meet">
+          <div class="insta-hover-overlay">
+            <p data-i18n="insta_card_2">2026 சட்டமன்ற தேர்தலுக்கான ஜோதி நகர் இளைஞர் பாசறை ஆலோசனைக் கூட்டம்.</p>
+            <span class="insta-tag">#VettriTamilNadu #YouthPower</span>
+          </div>
+        </div>
+
+        <div class="insta-post-card">
+          <img src="assets/images/4.png" alt="Tree Plantation Drive">
+          <div class="insta-hover-overlay">
+            <p data-i18n="insta_card_3">பசுமை தஞ்சை இயக்கம் - ஜோதி நகர் பள்ளி வளாகத்தில் மரக்கன்றுகள் நடும் விழா.</p>
+            <span class="insta-tag">#GreenThanjavur #TVKService</span>
+          </div>
+        </div>
+
+        <div class="insta-post-card">
+          <img src="assets/images/6.png" alt="Medical Camp">
+          <div class="insta-hover-overlay">
+            <p data-i18n="insta_card_4">பொதுமக்களுக்கான இலவச ரத்த அழுத்த மற்றும் சர்க்கரை நோய் பரிசோதனை முகாம்.</p>
+            <span class="insta-tag">#HealthFirst #TVKThanjavur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       LEADERSHIP & DISTRICT ROOTS (Thanjavur Central District & TVK Ideology)
+       ========================================================================== -->
+  <section class="leadership-section" id="leadership">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-badge" data-i18n="leadership_badge">கழக தலைமை & வழிகாட்டிகள்</span>
+        <h2 class="section-title" data-i18n="leadership_title">நேர்மையான தலைமை <span>மக்களுக்கான பாதை</span></h2>
+        <p class="section-desc" data-i18n="leadership_desc">மண்ணின் பெருமையும், மக்களின் உரிமையும் காக்க உருவான புரட்சி இயக்கம்.</p>
+      </div>
+
+      <!-- TVK Ideological Leaders Banner -->
+      <div class="leaders-banner-container">
+        <img src="assets/images/TVK-LEADERS-300x64.png" alt="TVK Icons - Periyar, Ambedkar, Kamarajar, Velu Nachiyar" class="leaders-banner-img">
+      </div>
+
+      <div class="leadership-grid">
+        <!-- Leader 1: Thalapathy Vijay -->
+        <div class="leader-card">
+          <div class="leader-img-box">
+            <img src="assets/images/vijay.jpg" alt="Thalapathy Vijay" class="img-vijay">
+          </div>
+          <div class="leader-info">
+            <span class="leader-badge" data-i18n="leader1_badge">நிறுவனர் & தலைவர்</span>
+            <h3 data-i18n="leader1_name">தளபதி விஜய்</h3>
+            <p class="designation" data-i18n="leader1_role">தலைவர் - தமிழக வெற்றிக் கழகம்</p>
+            <p data-i18n="leader1_desc">சமூக நீதி, ஊழலற்ற நிர்வாகம் மற்றும் இளைஞர்களுக்கான புது அரசியல் வாய்ப்பை உருவாக்கி தரும் உறுதிமிக்க தலைமை.</p>
+          </div>
+        </div>
+
+        <!-- Leader 2: Thanjavur Central District Secretary R. Vijay Saravanan -->
+        <div class="leader-card">
+          <div class="leader-img-box">
+            <img src="assets/images/district_secretary_rvs.jpg" alt="Mr. R. Vijay Saravanan - TVK District Secretary" class="img-district-sec">
+          </div>
+          <div class="leader-info">
+            <span class="leader-badge" data-i18n="leader2_badge">மாவட்டச் செயலாளர்</span>
+            <h3 data-i18n="leader2_name">திரு. இரா.விஜய்சரவணன்</h3>
+            <p class="designation" data-i18n="leader2_role">தஞ்சை மத்திய மாவட்ட கழக செயலாளர்</p>
+            <p data-i18n="leader2_desc">தஞ்சை மத்திய மாவட்டம் மற்றும் தஞ்சாவூர் சட்டமன்றத் தொகுதியின் வளர்ச்சிப் பணிகளை முன்னெடுக்கும் கழக வழிகாட்டி.</p>
+          </div>
+        </div>
+
+        <!-- Leader 3: Jothi Nagar Ward Committee -->
+        <div class="leader-card">
+          <div class="leader-img-box">
+            <img src="assets/images/ward_jothinagar_team.jpg" alt="Jothi Nagar Ward Committee" class="img-ward-team">
+          </div>
+          <div class="leader-info">
+            <span class="leader-badge" data-i18n="leader3_badge">வார்டு பொறுப்பாளர்கள்</span>
+            <h3 data-i18n="leader3_name">ஜோதி நகர் வார்டு குழு</h3>
+            <p class="designation" data-i18n="leader3_role">வார்டு நிர்வாகிகள் & இளைஞர் அணி</p>
+            <p data-i18n="leader3_desc">ஜோதி நகர் வாழ் மக்களின் அன்றாட பிரச்சனைகளை மாநகராட்சி மற்றும் கழக தலைமைக்கு உடனுக்குடன் கொண்டு செல்லும் களப்பணியாளர்கள்.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Ideological Pillars -->
+      <div class="pillars-row">
+        <div class="pillar-box">
+          <div class="pillar-icon">⚖️</div>
+          <h4 data-i18n="pillar1_title">சமூக நீதி (Social Justice)</h4>
+          <p data-i18n="pillar1_desc">பாகுபாடின்றி அனைவருக்கும் சமவாய்ப்புகளை உருவாக்குதல் மற்றும் அடித்தட்டு மக்களின் உரிமைகளை நிலைநாட்டுதல்.</p>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-icon">💻</div>
+          <h4 data-i18n="pillar2_title">தொழில்நுட்ப மேம்பாடு (Tech Innovation)</h4>
+          <p data-i18n="pillar2_desc">நவீன தகவல் தொழில்நுட்பத்தைப் பயன்படுத்தி வெளிப்படையான, வேகமான மக்கள் குறைதீர்ப்பு சேவை வழங்குதல்.</p>
+        </div>
+
+        <div class="pillar-box">
+          <div class="pillar-icon">🌟</div>
+          <h4 data-i18n="pillar3_title">இளைய தலைமுறைக்கு வாய்ப்பு (Youth Leadership)</h4>
+          <p data-i18n="pillar3_desc">அரசியல் மற்றும் சமூக சேவையில் படித்த, நேர்மையான இளைஞர்களைத் தலைமைப் பொறுப்புக்குக் கொண்டுவருதல்.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       MANIFESTO 2026 WARD SUGGESTIONS
+       ========================================================================== -->
+  <section class="manifesto-banner-section" id="manifesto">
+    <div class="manifesto-box">
+      <div class="manifesto-text">
+        <h2 data-i18n="manifesto_title">2026 தேர்தல் அறிக்கை - ஜோதி நகர் பரிந்துரைகள்</h2>
+        <p data-i18n="manifesto_desc">உங்கள் தெரு அல்லது வார்டுக்கான தொலைநோக்கு திட்டங்களை மாநில தலைமைக்கு உடனே சமர்ப்பியுங்கள்!</p>
+      </div>
+      <div>
+        <a href="https://tvkmanifesto2026.com/" target="_blank" rel="noopener" class="btn-primary" style="background: var(--tvk-gold); color: #500a04; border: none;">
+          <span data-i18n="manifesto_btn">🚀 மாநில தளத்தில் பதிவு செய்க (tvkmanifesto2026.com)</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <img src="assets/images/Flag-with-Transparent-BG-rj4zj7mv8vzgjmzsqefwigezqefxrsuwjpp48v2qpc.png" height="42" alt="Flag">
+          <h3 style="color: #fff; font-size: 1.2rem;" data-i18n="footer_brand">த.வெ.க ஜோதி நகர்</h3>
+        </div>
+        <p data-i18n="footer_tagline">தஞ்சை மத்திய மாவட்ட த.வெ.க வழிகாட்டுதலில் செயல்படும் ஜோதி நகர் பகுதி மக்கள் சேவை மற்றும் குறைதீர்ப்பு தளம்.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4 data-i18n="footer_col1_title">முக்கிய இணைப்புகள்</h4>
+        <ul>
+          <li><a href="#home" data-i18n="nav_home">முகப்பு</a></li>
+          <li><a href="#complaints" data-i18n="nav_complaints">குறைதீர்ப்பு படிவம்</a></li>
+          <li><a href="#dashboard" data-i18n="nav_tracker">புகார் கண்காணிப்பகம்</a></li>
+          <li><a href="#leadership" data-i18n="nav_leadership">மாவட்ட தலைமை</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4 data-i18n="footer_col2_title">அதிகாரப்பூர்வ தளங்கள்</h4>
+        <ul>
+          <li><a href="https://www.tvk.family/" target="_blank" rel="noopener">tvk.family (உறுப்பினர் சேர்க்கை)</a></li>
+          <li><a href="https://tvkmanifesto2026.com/" target="_blank" rel="noopener">tvkmanifesto2026.com</a></li>
+          <li><a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener">Instagram: @jodhinagartvk</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4 data-i18n="footer_col3_title">வார்டு அலுவலகம்</h4>
+        <p style="color: #94a3b8; font-size: 0.85rem; line-height: 1.6;" data-i18n="footer_address">
+          த.வெ.க ஜோதி நகர் வார்டு மையம்,<br>
+          மெயின் ரோடு, ஜோதி நகர்,<br>
+          தஞ்சாவூர் - 613 007.<br>
+          📞 உதவி எண்: +91 94432 XXXXX
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p data-i18n="footer_copyright">© 2026 தமிழக வெற்றிக் கழகம் (TVK) - ஜோதி நகர் வார்டு, தஞ்சாவூர் தொகுதி. All Rights Reserved.</p>
+      <p data-i18n="footer_sub">Designed with ❤️ for Thanjavur Citizens</p>
+    </div>
+  </footer>
+
+  <!-- Complaint Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-content">
+      <button class="btn-close-modal" onclick="closeSuccessModal()">✕</button>
+      <div style="text-align: center;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">🎉</div>
+        <h3 style="color: var(--tvk-text-main); font-size: 1.4rem; font-weight: 800; margin-bottom: 8px;" data-i18n="modal_success_title">உங்கள் புகார் வெற்றிகரமாக பதிவானது!</h3>
+        <p style="color: var(--tvk-text-muted); font-size: 0.9rem; margin-bottom: 20px;" data-i18n="modal_success_desc">தஞ்சை மத்திய மாவட்ட த.வெ.க ஜோதி நகர் வார்டு குழு உங்கள் புகாரை ஆய்வு செய்து உடனடியாக நடவடிக்கை எடுக்கும்.</p>
+        
+        <div style="background: var(--tvk-gold-subtle); border: 1px dashed var(--tvk-gold); padding: 14px; border-radius: 8px; margin-bottom: 24px;">
+          <span style="font-size: 0.8rem; color: var(--tvk-text-muted);" data-i18n="modal_ref_label">புகார் குறிப்பு எண் (Reference ID):</span>
+          <h2 id="modalRefId" style="color: var(--tvk-gold); font-size: 1.5rem; letter-spacing: 0.05em;">TVK-JN-2026-0842</h2>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a id="btnWhatsAppShare" href="#" target="_blank" class="btn-primary" style="background: #25d366; border: none; font-size: 0.9rem;">
+            <span data-i18n="modal_btn_whatsapp">💬 WhatsApp-ல் வார்டு செயலாளருக்கு அனுப்புக</span>
+          </a>
+          <button class="btn-secondary" onclick="closeSuccessModal()" style="font-size: 0.9rem;" data-i18n="modal_btn_close">
+            <span>மூடுக (Close)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Leaflet Map JS (100% Free OpenStreetMap Engine) -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="app.js"></script>
+</body>
+</html>
