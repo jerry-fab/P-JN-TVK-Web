@@ -408,7 +408,7 @@ const INITIAL_COMPLAINTS = [
 let currentCategory = 'road';
 let currentLang = localStorage.getItem('tvk_lang') || 'ta';
 let uploadedImageDataUrl = null;
-let currentTheme = localStorage.getItem('tvk_theme') || 'dark';
+let currentTheme = localStorage.getItem('tvk_theme') || 'light';
 
 // Map State (OpenStreetMap + Leaflet.js)
 let grievanceMap = null;
@@ -428,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
  * 0. Theme Manager (Dark / Light)
  */
 function initTheme() {
-  currentTheme = localStorage.getItem('tvk_theme') || 'dark';
+  currentTheme = localStorage.getItem('tvk_theme') || 'light';
   applyTheme(currentTheme);
 }
 
