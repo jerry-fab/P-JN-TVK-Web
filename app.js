@@ -1469,6 +1469,8 @@ function renderInstagramPosts() {
       ${trendingBadge}
       <span class="insta-time-pill">${relativeTime}</span>
       <img src="${escapeHtml(post.imageUrl)}" alt="Instagram Post ${index + 1}" loading="lazy">
+      
+      <!-- Desktop Hover Overlay -->
       <div class="insta-hover-overlay">
         <span class="insta-corner-icon">📸</span>
         <p>${escapeHtml(caption)}</p>
@@ -1480,6 +1482,15 @@ function renderInstagramPosts() {
         <a href="${escapeHtml(post.url || 'https://www.instagram.com/jodhinagartvk/')}" target="_blank" rel="noopener" class="insta-post-link">
           ${viewBtnText}
         </a>
+      </div>
+
+      <!-- Mobile Native Caption Strip (Visible directly without hover) -->
+      <div class="insta-mobile-caption-box">
+        <p class="insta-mobile-text">${escapeHtml(caption)}</p>
+        <div class="insta-mobile-footer">
+          <span class="insta-mobile-tags">${escapeHtml(post.tags || '#TVKJothiNagar')}</span>
+          <span class="insta-mobile-likes">❤️ ${post.likes || '1.8k'}</span>
+        </div>
       </div>
     `;
 
