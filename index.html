@@ -13,7 +13,7 @@
   
   <!-- Leaflet CSS for 100% Free OpenStreetMap -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2.0">
   <link rel="icon" type="image/png" href="assets/images/WHISTLE-BADGE.png">
 </head>
 <body>
@@ -66,6 +66,124 @@
       </div>
     </div>
   </header>
+
+  <!-- ==========================================================================
+       TOP SLIDING GALLERY (Leadership & Ward Frontline Gallery Slider)
+       ========================================================================== -->
+  <section class="top-gallery-section" id="topGallery">
+    <div class="section-container">
+      <div class="top-gallery-header">
+        <span class="gallery-badge" data-i18n="top_gallery_badge">⭐ கழக வழிகாட்டிகள் & தலைமை</span>
+        <h2 class="gallery-title" data-i18n="top_gallery_title">த.வெ.க ஜோதி நகர் <span>தலைமை & களப்பணியாளர்கள்</span></h2>
+        <p class="gallery-subtitle" data-i18n="top_gallery_desc">மக்கள் பணிக்காக தங்களை அர்ப்பணித்த கழகத்தின் வழிகாட்டிகள் மற்றும் ஜோதி நகர் களப்பணியாளர்கள்.</p>
+      </div>
+
+      <div class="coverflow-stage-wrapper" id="topGallerySlider">
+        <button class="gallery-nav-btn prev-btn" id="galleryPrevBtn" onclick="prevCoverflowSlide()" aria-label="Previous Slide">❮</button>
+        
+        <div class="coverflow-viewport">
+          <div class="coverflow-stage" id="coverflowStage">
+            <!-- Card 0: Thalapathy Vijay -->
+            <div class="coverflow-card" id="cfCard0" onclick="handleCardClick(0)">
+              <div class="gallery-img-box">
+                <img src="assets/images/vijay.jpg" alt="Thalapathy Vijay">
+                <span class="gallery-card-badge" data-i18n="leader1_badge">நிறுவனர் & தலைவர்</span>
+              </div>
+              <div class="gallery-card-info">
+                <h3 class="gallery-card-name" data-i18n="leader1_name">தளபதி விஜய்</h3>
+                <p class="gallery-card-role" data-i18n="leader1_role">தலைவர் - தமிழக வெற்றிக் கழகம்</p>
+                <p class="gallery-card-desc" data-i18n="leader1_desc">சமூக நீதி, ஊழலற்ற நிர்வாகம் மற்றும் இளைஞர்களுக்கான புது அரசியல் வாய்ப்பை உருவாக்கி தரும் உறுதிமிக்க தலைமை.</p>
+              </div>
+            </div>
+
+            <!-- Card 1: District Secretary Mr. R. Vijay Saravanan -->
+            <div class="coverflow-card" id="cfCard1" onclick="handleCardClick(1)">
+              <div class="gallery-img-box">
+                <img src="assets/images/district_secretary_rvs.jpg" alt="Mr. R. Vijay Saravanan">
+                <span class="gallery-card-badge" data-i18n="leader2_badge">மாவட்டச் செயலாளர்</span>
+              </div>
+              <div class="gallery-card-info">
+                <h3 class="gallery-card-name" data-i18n="leader2_name">திரு. இரா.விஜய்சரவணன்</h3>
+                <p class="gallery-card-role" data-i18n="leader2_role">தஞ்சை மத்திய மாவட்ட கழக செயலாளர்</p>
+                <p class="gallery-card-desc" data-i18n="leader2_desc">தஞ்சை மத்திய மாவட்டம் மற்றும் தஞ்சாவூர் சட்டமன்றத் தொகுதியின் வளர்ச்சிப் பணிகளை முன்னெடுக்கும் கழக வழிகாட்டி.</p>
+              </div>
+            </div>
+
+            <!-- Card 2: Jothi Nagar Ward Committee -->
+            <div class="coverflow-card" id="cfCard2" onclick="handleCardClick(2)">
+              <div class="gallery-img-box">
+                <img src="assets/images/ward_jothinagar_team.jpg" alt="Jothi Nagar Ward Committee">
+                <span class="gallery-card-badge" data-i18n="leader3_badge">வார்டு பொறுப்பாளர்கள்</span>
+              </div>
+              <div class="gallery-card-info">
+                <h3 class="gallery-card-name" data-i18n="leader3_name">ஜோதி நகர் வார்டு குழு</h3>
+                <p class="gallery-card-role" data-i18n="leader3_role">வார்டு நிர்வாகிகள் & இளைஞர் அணி</p>
+                <p class="gallery-card-desc" data-i18n="leader3_desc">ஜோதி நகர் வாழ் மக்களின் அன்றாட பிரச்சனைகளை மாநகராட்சி மற்றும் கழக தலைமைக்கு உடனுக்குடன் கொண்டு செல்லும் களப்பணியாளர்கள்.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery-nav-btn next-btn" id="galleryNextBtn" onclick="nextCoverflowSlide()" aria-label="Next Slide">❯</button>
+      </div>
+
+      <!-- Dot Indicators & Progress -->
+      <div class="gallery-controls-bar">
+        <div class="gallery-dots" id="galleryDots"></div>
+        <span class="gallery-auto-hint">
+          <span class="pulse-dot"></span> <span data-i18n="gallery_slide_hint">தானாக நகரும் கேலரி (Auto Sliding)</span>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INSTAGRAM SHOWCASE (Dynamic Hourly Live Feed with #1 Trending Post - @jodhinagartvk)
+       ========================================================================== -->
+  <section class="instagram-showcase-section" id="instagram">
+    <div class="section-container">
+      <div class="insta-header-bar">
+        <div class="insta-profile-meta">
+          <img src="assets/images/WHISTLE-BADGE.png" alt="Jodhinagar TVK Avatar" class="insta-avatar">
+          <div class="insta-info">
+            <div class="insta-handle-row">
+              <h3><a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener">@jodhinagartvk</a></h3>
+              <span class="verified-badge" title="Official Ward Channel">✓</span>
+            </div>
+            <p data-i18n="insta_subtitle">ஜோதி நகர் த.வெ.க அதிகாரப்பூர்வ இன்ஸ்டாகிராம் பக்கம் | தஞ்சாவூர்</p>
+          </div>
+        </div>
+
+        <a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener" class="btn-follow-insta">
+          <span data-i18n="btn_follow_insta">📷 Instagram-ல் பின்தொடரவும்</span>
+          <span>↗</span>
+        </a>
+      </div>
+
+      <!-- Hourly Live Sync Toolbar -->
+      <div class="insta-sync-toolbar">
+        <div class="sync-status-group">
+          <span class="live-indicator-pill">
+            <span class="live-dot-pulse"></span>
+            <span data-i18n="insta_sync_title">நேரலை சரிபார்ப்பு (Hourly Live Sync)</span>
+          </span>
+          <span class="sync-time-badge" id="syncStatusText" data-i18n="sync_just_now">கடைசி சரிபார்ப்பு: இப்போது (Checked: Just now)</span>
+        </div>
+
+        <div class="sync-actions-group">
+          <button class="btn-sync-now" id="btnSyncInsta" onclick="checkInstagramHourlyUpdates(true)" title="Check for New Instagram Posts">
+            <span class="sync-icon" id="syncIcon">🔄</span>
+            <span data-i18n="btn_sync_now">இப்போது சரிபார்க்க (Check Now)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic Post Grid (Rendered via renderInstagramPosts() in app.js) -->
+      <div class="insta-grid-5" id="instaDynamicGrid">
+        <!-- Injected dynamically via app.js -->
+      </div>
+    </div>
+  </section>
 
   <!-- Hero Section -->
   <section class="hero-section" id="home">
@@ -431,61 +549,7 @@
     </div>
   </section>
 
-  <!-- ==========================================================================
-       INSTAGRAM FEED & GALLERY SHOWCASE (@jodhinagartvk)
-       ========================================================================== -->
-  <section class="instagram-showcase-section" id="instagram">
-    <div class="section-container">
-      <div class="insta-header-bar">
-        <div class="insta-profile-meta">
-          <img src="assets/images/WHISTLE-BADGE.png" alt="Jodhinagar TVK Avatar" class="insta-avatar">
-          <div class="insta-info">
-            <h3>@jodhinagartvk</h3>
-            <p data-i18n="insta_subtitle">ஜோதி நகர் த.வெ.க அதிகாரப்பூர்வ இன்ஸ்டாகிராம் பக்கம் | தஞ்சாவூர்</p>
-          </div>
-        </div>
-
-        <a href="https://www.instagram.com/jodhinagartvk/" target="_blank" rel="noopener" class="btn-follow-insta">
-          <span data-i18n="btn_follow_insta">📷 Instagram-ல் பின்தொடரவும்</span>
-          <span>↗</span>
-        </a>
-      </div>
-
-      <div class="insta-grid">
-        <div class="insta-post-card">
-          <img src="assets/images/1.png" alt="TVK Welfare Distribution">
-          <div class="insta-hover-overlay">
-            <p data-i18n="insta_card_1">ஜோதி நகர் பகுதியில் த.வெ.க சார்பில் கல்வி உபகரணங்கள் மற்றும் நலத்திட்ட உதவிகள் வழங்கப்பட்டது.</p>
-            <span class="insta-tag">#TVKJothiNagar #ThalapathyVijay</span>
-          </div>
-        </div>
-
-        <div class="insta-post-card">
-          <img src="assets/images/3.png" alt="TVK Youth Wing Meet">
-          <div class="insta-hover-overlay">
-            <p data-i18n="insta_card_2">2026 சட்டமன்ற தேர்தலுக்கான ஜோதி நகர் இளைஞர் பாசறை ஆலோசனைக் கூட்டம்.</p>
-            <span class="insta-tag">#VettriTamilNadu #YouthPower</span>
-          </div>
-        </div>
-
-        <div class="insta-post-card">
-          <img src="assets/images/4.png" alt="Tree Plantation Drive">
-          <div class="insta-hover-overlay">
-            <p data-i18n="insta_card_3">பசுமை தஞ்சை இயக்கம் - ஜோதி நகர் பள்ளி வளாகத்தில் மரக்கன்றுகள் நடும் விழா.</p>
-            <span class="insta-tag">#GreenThanjavur #TVKService</span>
-          </div>
-        </div>
-
-        <div class="insta-post-card">
-          <img src="assets/images/6.png" alt="Medical Camp">
-          <div class="insta-hover-overlay">
-            <p data-i18n="insta_card_4">பொதுமக்களுக்கான இலவச ரத்த அழுத்த மற்றும் சர்க்கரை நோய் பரிசோதனை முகாம்.</p>
-            <span class="insta-tag">#HealthFirst #TVKThanjavur</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- ==========================================================================
        LEADERSHIP & DISTRICT ROOTS (Thanjavur Central District & TVK Ideology)
@@ -659,6 +723,9 @@
 
   <!-- Leaflet Map JS (100% Free OpenStreetMap Engine) -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=2.0"></script>
+
+  
+
 </body>
 </html>
