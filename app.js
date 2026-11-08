@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v5_interactive_manager';
+const INSTA_FEED_VERSION = 'v6_real_posts';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1302,57 +1302,57 @@ let uploadedInstaImageDataUrl = null;
 const DEFAULT_INSTA_POSTS = [
   {
     id: 'post-1',
-    imageUrl: 'assets/images/vijay.jpg',
-    caption_ta: 'த.வெ.க தலைவர் தளபதி விஜய் அவர்களின் வழிகாட்டலில் ஜோதி நகர் வார்டு நேரலை குறைதீர்ப்பு தளம் துவக்கம்!',
-    caption_en: 'Under the guidance of TVK President Thalapathy Vijay, the official Jothi Nagar civic portal has been launched!',
-    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow #VettriTamilNadu',
-    timestamp: Date.now() - 15 * 60 * 1000,
-    likes: '3.4k',
-    comments: '420',
+    imageUrl: 'assets/images/insta_posts/insta_real_1.jpg',
+    caption_ta: 'இனிய தீபாவளி திருநாள் நல்வாழ்த்துகள் - R. துஷாந்த் | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
+    caption_en: 'Happy Deepavali Wishes - R. Dushanth | Tamilaga Vettri Kazhagam Jothi Nagar Branch',
+    tags: '#TVKJothiNagar #ThalapathyVijay #DeepavaliWishes #TrendingNow #VettriTamilNadu',
+    timestamp: Date.now() - 30 * 60 * 1000,
+    likes: '4.8k',
+    comments: '520',
     url: 'https://www.instagram.com/jodhinagartvk/'
   },
   {
     id: 'post-2',
-    imageUrl: 'assets/images/district_secretary_rvs.jpg',
-    caption_ta: 'தஞ்சை மத்திய மாவட்ட கழக செயலாளர் திரு. இரா.விஜய்சரவணன் தலைமையில் ஜோதி நகர் வார்டு ஆலோசனைக் கூட்டம்.',
-    caption_en: 'TVK Thanjavur Central District Secretary Mr. R. Vijay Saravanan presided over the Jothi Nagar consultative meeting.',
-    tags: '#TVKThanjavur #DistrictSecretary #YouthPower',
-    timestamp: Date.now() - 2 * 3600 * 1000,
-    likes: '2.1k',
-    comments: '215',
+    imageUrl: 'assets/images/insta_posts/insta_real_2.jpg',
+    caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்! நவம்பர் 5 முதல் 7 வரை விற்பனை.',
+    caption_en: 'Vetri Special Vegetables Pack - 10 varieties of fresh vegetables for just ₹100! Available for sale from Nov 5 to 7.',
+    tags: '#VetriVegetablesPack #PublicWelfare #TVKJothiNagar #ThalapathyVijay',
+    timestamp: Date.now() - 3 * 3600 * 1000,
+    likes: '3.9k',
+    comments: '390',
     url: 'https://www.instagram.com/jodhinagartvk/'
   },
   {
     id: 'post-3',
-    imageUrl: 'assets/images/ward_jothinagar_team.jpg',
-    caption_ta: 'ஜோதி நகர் பகுதி குடிமைப் பிரச்சனைகளை நேரில் ஆய்வு செய்து மாநகராட்சிக்கு கொண்டு செல்லும் த.வெ.க வார்டு களப்பணியாளர்கள்.',
-    caption_en: 'TVK Jothi Nagar ward committee frontline team conducting on-site field survey of citizen civic grievances.',
-    tags: '#FieldAction #JothiNagarTVK #PublicService',
-    timestamp: Date.now() - 6 * 3600 * 1000,
-    likes: '1.8k',
-    comments: '160',
+    imageUrl: 'assets/images/insta_posts/insta_real_3.jpg',
+    caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - தமிழக வெற்றிக் கழக தலைவர் தளபதி விஜய்.',
+    caption_en: 'Honest politics for the people - Tamilaga Vettri Kazhagam President Thalapathy Vijay.',
+    tags: '#ThalapathyVijay #TVK #VettriTamilNadu2026 #VijayLeadership',
+    timestamp: Date.now() - 8 * 3600 * 1000,
+    likes: '5.2k',
+    comments: '680',
     url: 'https://www.instagram.com/jodhinagartvk/'
   },
   {
     id: 'post-4',
-    imageUrl: 'assets/images/road_issue.jpg',
-    caption_ta: 'ஜோதி நகர் மெயின் ரோடு குண்டும் குழியுமாக உள்ள சாலைகளை போர்க்கால அடிப்படையில் சீரமைக்க மாநகராட்சிக்கு மனு சமர்ப்பிப்பு.',
-    caption_en: 'Civic petition submitted to municipal authorities for prompt road resurfacing across Jothi Nagar main road.',
-    tags: '#CivicAction #RoadSafety #ThanjavurTVK',
-    timestamp: Date.now() - 19 * 3600 * 1000,
-    likes: '1.6k',
-    comments: '188',
+    imageUrl: 'assets/images/insta_posts/insta_real_4.jpg',
+    caption_ta: 'SIR விவகாரத்தில் மக்களின் வாக்குரிமையைப் பாதுகாக்க குடியரசுத் தலைவரிடம் த.வெ.க நாடாளுமன்ற உறுப்பினர்கள் மனு சமர்ப்பிப்பு!',
+    caption_en: 'TVK Parliamentary delegation submits memorandum to the Hon President of India to safeguard citizen voting rights in the SIR issue.',
+    tags: '#Democracy #VotingRights #TVKAction #PresidentOfIndia',
+    timestamp: Date.now() - 24 * 3600 * 1000,
+    likes: '3.1k',
+    comments: '280',
     url: 'https://www.instagram.com/jodhinagartvk/'
   },
   {
     id: 'post-5',
-    imageUrl: 'assets/images/Flag-with-Transparent-BG-rj4zj7mv8vzgjmzsqefwigezqefxrsuwjpp48v2qpc.png',
-    caption_ta: '2026 சட்டமன்ற தேர்தலை முன்னிட்டு ஜோதி நகர் பகுதியில் த.வெ.க தீவிர உறுப்பினர் சேர்க்கை இயக்கம்.',
-    caption_en: 'TVK grassroots citizen membership drive in full swing across Jothi Nagar ahead of 2026 Assembly Elections.',
-    tags: '#TVKFamily #MembershipDrive #Vijay2026',
-    timestamp: Date.now() - 28 * 3600 * 1000,
-    likes: '2.5k',
-    comments: '310',
+    imageUrl: 'assets/images/insta_posts/insta_real_5.jpg',
+    caption_ta: 'ஜோதி நகர் பகுதியில் த.வெ.க சார்பில் கல்வி உபகரணங்கள் மற்றும் நலத்திட்ட உதவிகள் வழங்கப்பட்டது.',
+    caption_en: 'TVK organized educational supplies drive and community welfare distribution in Jothi Nagar.',
+    tags: '#TVKJothiNagar #EducationWelfare #PublicService #Vijay2026',
+    timestamp: Date.now() - 36 * 3600 * 1000,
+    likes: '2.7k',
+    comments: '210',
     url: 'https://www.instagram.com/jodhinagartvk/'
   }
 ];
