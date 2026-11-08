@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v12_premium_card_design';
+const INSTA_FEED_VERSION = 'v13_clean_img_paths';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1301,7 +1301,7 @@ let uploadedInstaImageDataUrl = null;
 const DEFAULT_INSTA_POSTS = [
   {
     id: 'insta-live-1',
-    imageUrl: 'img/posts/insta_post_1.jpg',
+    imageUrl: 'img/posts/p-post-1.jpg',
     caption_ta: 'இனிய தீபாவளி திருநாள் நல்வாழ்த்துகள் - R. துஷாந்த் | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Happy Deepavali Wishes - R. Dushanth | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1315,7 +1315,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-2',
-    imageUrl: 'img/posts/insta_post_2.jpg',
+    imageUrl: 'img/posts/p-post-2.jpg',
     caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்!',
     caption_en: 'Vetri Special Vegetables Pack - 10 fresh vegetables for ₹100!',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1329,7 +1329,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-3',
-    imageUrl: 'img/posts/insta_post_3.jpg',
+    imageUrl: 'img/posts/p-post-3.jpg',
     caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - கழக தலைவர் தளபதி விஜய் (Official Video / Reel)',
     caption_en: 'The honest political path for the people - TVK President Thalapathy Vijay',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1343,7 +1343,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-4',
-    imageUrl: 'img/posts/insta_post_4.jpg',
+    imageUrl: 'img/posts/p-post-4.jpg',
     caption_ta: 'SIR விவகாரம் & ஜனநாயக வாக்குரிமை பாதுகாப்பு குறித்த அறிக்கை - ஜோதி நகர் த.வெ.க',
     caption_en: 'Press report on democratic voting rights and civic updates',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1357,7 +1357,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-5',
-    imageUrl: 'img/posts/insta_post_5.jpg',
+    imageUrl: 'img/posts/p-post-5.jpg',
     caption_ta: 'தளபதி விஜய் 👑 | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Thalapathy Vijay 👑 | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1503,7 +1503,7 @@ function renderInstagramPosts() {
       <!-- Card Top Bar: Instagram Header -->
       <div class="insta-card-header">
         <div class="insta-card-author">
-          <img src="img/icons/WHISTLE-BADGE.png" alt="TVK" class="insta-mini-avatar">
+          <img src="img/icons/i-whistle-badge.png" alt="TVK" class="insta-mini-avatar">
           <div class="insta-author-meta">
             <span class="insta-author-name">jodhinagartvk <span class="verified-badge-mini">✓</span></span>
             <span class="insta-author-sub">${postDateText ? `📅 ${postDateText}` : '@jodhinagartvk'}</span>

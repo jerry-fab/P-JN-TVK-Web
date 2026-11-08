@@ -70,3 +70,4 @@ const CONFIG = {
   outputJsonFile: path.join(__dirname, 'posts.json')
 };
 ```
+

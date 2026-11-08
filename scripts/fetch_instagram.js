@@ -163,7 +163,7 @@ async function scrapeInstagram() {
     const savedPosts = [];
     for (let i = 0; i < rawPosts.length; i++) {
       const p = rawPosts[i];
-      const localFileName = `insta_post_${i + 1}.jpg`;
+      const localFileName = `p-post-${i + 1}.jpg`;
       const localPath = path.join(POSTS_DIR, localFileName);
       const relativeWebPath = `img/posts/${localFileName}`;
 
