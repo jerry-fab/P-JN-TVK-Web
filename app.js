@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v10_img_folder_restructure';
+const INSTA_FEED_VERSION = 'v11_authentic_insta_dates';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1305,7 +1305,9 @@ const DEFAULT_INSTA_POSTS = [
     caption_ta: 'இனிய தீபாவளி திருநாள் நல்வாழ்த்துகள் - R. துஷாந்த் | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Happy Deepavali Wishes - R. Dushanth | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
-    timestamp: Date.now() - 30 * 60 * 1000,
+    date_ta: 'நவம்பர் 8',
+    date_en: 'Nov 8',
+    timestamp: 1794110458000,
     likes: '4.8k',
     comments: '480',
     url: 'https://www.instagram.com/jodhinagartvk/p/Dfd2XH6hfF6/',
@@ -1317,7 +1319,9 @@ const DEFAULT_INSTA_POSTS = [
     caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்!',
     caption_en: 'Vetri Special Vegetables Pack - 10 fresh vegetables for ₹100!',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
-    timestamp: Date.now() - 3 * 3600 * 1000,
+    date_ta: 'நவம்பர் 4',
+    date_en: 'Nov 4',
+    timestamp: 1793793600000,
     likes: '4.4k',
     comments: '430',
     url: 'https://www.instagram.com/jodhinagartvk/p/DfUBaxzMRla/',
@@ -1329,7 +1333,9 @@ const DEFAULT_INSTA_POSTS = [
     caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - கழக தலைவர் தளபதி விஜய் (Official Video / Reel)',
     caption_en: 'The honest political path for the people - TVK President Thalapathy Vijay',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
-    timestamp: Date.now() - 8 * 3600 * 1000,
+    date_ta: 'அக்டோபர் 25',
+    date_en: 'Oct 25',
+    timestamp: 1792909071000,
     likes: '4.0k',
     comments: '380',
     url: 'https://www.instagram.com/jodhinagartvk/reel/De6B9YKPIsz/',
@@ -1341,7 +1347,9 @@ const DEFAULT_INSTA_POSTS = [
     caption_ta: 'SIR விவகாரம் & ஜனநாயக வாக்குரிமை பாதுகாப்பு குறித்த அறிக்கை - ஜோதி நகர் த.வெ.க',
     caption_en: 'Press report on democratic voting rights and civic updates',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
-    timestamp: Date.now() - 24 * 3600 * 1000,
+    date_ta: 'அக்டோபர் 23',
+    date_en: 'Oct 23',
+    timestamp: 1792736425000,
     likes: '3.6k',
     comments: '330',
     url: 'https://www.instagram.com/jodhinagartvk/p/De05mxNGgbC/',
@@ -1353,7 +1361,9 @@ const DEFAULT_INSTA_POSTS = [
     caption_ta: 'தளபதி விஜய் 👑 | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Thalapathy Vijay 👑 | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
-    timestamp: Date.now() - 36 * 3600 * 1000,
+    date_ta: 'அக்டோபர் 21',
+    date_en: 'Oct 21',
+    timestamp: 1792595832000,
     likes: '3.2k',
     comments: '280',
     url: 'https://www.instagram.com/jodhinagartvk/p/DewtbvXB_Xa/',
@@ -1486,7 +1496,7 @@ function renderInstagramPosts() {
     const caption = currentLang === 'ta' ? (post.caption_ta || post.caption) : (post.caption_en || post.caption || post.caption_ta);
     const viewBtnText = dict.insta_view_btn || 'Instagram-ல் பார்க்க ↗';
     const trendingText = dict.badge_trending || 'டிரெண்டிங் (TRENDING)';
-    const relativeTime = formatRelativeTime(post.timestamp);
+    const postDateText = currentLang === 'ta' ? (post.date_ta || '') : (post.date_en || post.date_ta || '');
 
     const trendingBadge = isTrending ? `
       <div class="badge-trending">
@@ -1497,7 +1507,6 @@ function renderInstagramPosts() {
 
     card.innerHTML = `
       ${trendingBadge}
-      <span class="insta-time-pill">${relativeTime}</span>
       <img src="${escapeHtml(post.imageUrl)}" alt="Instagram Post ${index + 1}" loading="lazy">
       
       <!-- Desktop Hover Overlay -->
@@ -1508,6 +1517,7 @@ function renderInstagramPosts() {
         <div class="insta-post-meta-strip">
           <span>❤️ ${post.likes || '1.8k'}</span>
           <span>💬 ${post.comments || '210'}</span>
+          ${postDateText ? `<span>📅 ${postDateText}</span>` : ''}
         </div>
         <div style="display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 8px; flex-wrap: wrap;">
           <a href="${escapeHtml(post.url || INSTAGRAM_CONFIG.profileUrl)}" target="_blank" rel="noopener" class="insta-post-link">
@@ -1525,6 +1535,7 @@ function renderInstagramPosts() {
         <div class="insta-mobile-footer">
           <span class="insta-mobile-tags">${escapeHtml(post.tags || '#TVKJothiNagar')}</span>
           <span class="insta-mobile-likes">❤️ ${post.likes || '1.8k'}</span>
+          ${postDateText ? `<span style="opacity: 0.9;">📅 ${postDateText}</span>` : ''}
         </div>
       </div>
     `;
