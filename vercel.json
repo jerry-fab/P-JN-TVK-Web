@@ -4,7 +4,7 @@
   "rewrites": [
     {
       "source": "/api/instagram/posts",
-      "destination": "/assets/data/instagram_posts.json"
+      "destination": "/data/instagram_posts.json"
     }
   ]
 }

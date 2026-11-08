@@ -11,7 +11,9 @@ try {
 
 const PORT = 3000;
 const ROOT = __dirname;
-const DATA_FILE = path.join(ROOT, 'assets', 'data', 'instagram_posts.json');
+const DATA_FILE = fs.existsSync(path.join(ROOT, 'data', 'instagram_posts.json'))
+  ? path.join(ROOT, 'data', 'instagram_posts.json')
+  : path.join(ROOT, 'assets', 'data', 'instagram_posts.json');
 let isScrapingInProgress = false;
 
 const MIME_TYPES = {

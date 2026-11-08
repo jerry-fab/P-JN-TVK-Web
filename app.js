@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v9_direct_insta_live_scraper';
+const INSTA_FEED_VERSION = 'v10_img_folder_restructure';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1301,7 +1301,7 @@ let uploadedInstaImageDataUrl = null;
 const DEFAULT_INSTA_POSTS = [
   {
     id: 'insta-live-1',
-    imageUrl: 'assets/images/insta_posts/insta_live_1.jpg',
+    imageUrl: 'img/posts/insta_post_1.jpg',
     caption_ta: 'இனிய தீபாவளி திருநாள் நல்வாழ்த்துகள் - R. துஷாந்த் | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Happy Deepavali Wishes - R. Dushanth | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1313,7 +1313,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-2',
-    imageUrl: 'assets/images/insta_posts/insta_live_2.jpg',
+    imageUrl: 'img/posts/insta_post_2.jpg',
     caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்!',
     caption_en: 'Vetri Special Vegetables Pack - 10 fresh vegetables for ₹100!',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1325,7 +1325,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-3',
-    imageUrl: 'assets/images/insta_posts/insta_live_3.jpg',
+    imageUrl: 'img/posts/insta_post_3.jpg',
     caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - கழக தலைவர் தளபதி விஜய் (Official Video / Reel)',
     caption_en: 'The honest political path for the people - TVK President Thalapathy Vijay',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1337,7 +1337,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-4',
-    imageUrl: 'assets/images/insta_posts/insta_live_4.jpg',
+    imageUrl: 'img/posts/insta_post_4.jpg',
     caption_ta: 'SIR விவகாரம் & ஜனநாயக வாக்குரிமை பாதுகாப்பு குறித்த அறிக்கை - ஜோதி நகர் த.வெ.க',
     caption_en: 'Press report on democratic voting rights and civic updates',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1349,7 +1349,7 @@ const DEFAULT_INSTA_POSTS = [
   },
   {
     id: 'insta-live-5',
-    imageUrl: 'assets/images/insta_posts/insta_live_5.jpg',
+    imageUrl: 'img/posts/insta_post_5.jpg',
     caption_ta: 'தளபதி விஜய் 👑 | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
     caption_en: 'Thalapathy Vijay 👑 | TVK Jothi Nagar Ward',
     tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
@@ -1369,6 +1369,9 @@ async function initInstagramDynamicFeed() {
   let loadedFromSource = false;
   try {
     let res = await fetch('/api/instagram/posts');
+    if (!res.ok) {
+      res = await fetch('data/instagram_posts.json?v=' + Date.now());
+    }
     if (!res.ok) {
       res = await fetch('assets/data/instagram_posts.json?v=' + Date.now());
     }

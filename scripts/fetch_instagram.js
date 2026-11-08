@@ -14,13 +14,16 @@ const os = require('os');
 
 const EDGE_PATH = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
 const TARGET_URL = 'https://www.instagram.com/jodhinagartvk/';
-const POSTS_DIR = path.join(__dirname, '..', 'assets', 'images', 'insta_posts');
-const DATA_DIR = path.join(__dirname, '..', 'assets', 'data');
-const DATA_FILE = path.join(DATA_DIR, 'instagram_posts.json');
+const POSTS_DIR = path.join(__dirname, '..', 'img', 'posts');
+const DATA_DIR_1 = path.join(__dirname, '..', 'data');
+const DATA_DIR_2 = path.join(__dirname, '..', 'assets', 'data');
+const DATA_FILE_1 = path.join(DATA_DIR_1, 'instagram_posts.json');
+const DATA_FILE_2 = path.join(DATA_DIR_2, 'instagram_posts.json');
 
 // Ensure directories exist
 if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+if (!fs.existsSync(DATA_DIR_1)) fs.mkdirSync(DATA_DIR_1, { recursive: true });
+if (!fs.existsSync(DATA_DIR_2)) fs.mkdirSync(DATA_DIR_2, { recursive: true });
 
 const KNOWN_CAPTIONS = {
   'Dfd2XH6hfF6': {
@@ -160,9 +163,9 @@ async function scrapeInstagram() {
     const savedPosts = [];
     for (let i = 0; i < rawPosts.length; i++) {
       const p = rawPosts[i];
-      const localFileName = `insta_live_${i + 1}.jpg`;
+      const localFileName = `insta_post_${i + 1}.jpg`;
       const localPath = path.join(POSTS_DIR, localFileName);
-      const relativeWebPath = `assets/images/insta_posts/${localFileName}`;
+      const relativeWebPath = `img/posts/${localFileName}`;
 
       console.log(`⬇️ Downloading post ${i + 1} image...`);
       try {
@@ -178,7 +181,7 @@ async function scrapeInstagram() {
       let captionEn = known ? known.en : (p.alt || 'TVK Jothi Nagar live update (@jodhinagartvk)');
 
       savedPosts.push({
-        id: `insta-live-${Date.now()}-${i + 1}`,
+        id: `insta-live-${i + 1}`,
         imageUrl: relativeWebPath,
         caption_ta: captionTa,
         caption_en: captionEn,
@@ -191,8 +194,10 @@ async function scrapeInstagram() {
       });
     }
 
-    fs.writeFileSync(DATA_FILE, JSON.stringify(savedPosts, null, 2), 'utf8');
-    console.log(`🎉 Successfully saved ${savedPosts.length} posts to ${DATA_FILE}!`);
+    const payload = JSON.stringify(savedPosts, null, 2);
+    fs.writeFileSync(DATA_FILE_1, payload, 'utf8');
+    fs.writeFileSync(DATA_FILE_2, payload, 'utf8');
+    console.log(`🎉 Successfully saved ${savedPosts.length} posts to ${DATA_FILE_1}!`);
 
     if (browser) await browser.close();
     try { fs.rmSync(tempProfileDir, { recursive: true, force: true }); } catch (_) {}
