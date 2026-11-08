@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v11_authentic_insta_dates';
+const INSTA_FEED_VERSION = 'v12_premium_card_design';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1480,6 +1480,7 @@ function renderInstagramPosts() {
 
   displayPosts.forEach((post, index) => {
     const isTrending = index === 0;
+    const isReel = Boolean(post.url && post.url.includes('/reel/'));
     const card = document.createElement('div');
     card.className = `insta-post-card ${isTrending ? 'trending-post' : ''}`;
     card.style.cursor = 'pointer';
@@ -1495,48 +1496,46 @@ function renderInstagramPosts() {
     const dict = I18N[currentLang] || I18N.ta;
     const caption = currentLang === 'ta' ? (post.caption_ta || post.caption) : (post.caption_en || post.caption || post.caption_ta);
     const viewBtnText = dict.insta_view_btn || 'Instagram-ல் பார்க்க ↗';
-    const trendingText = dict.badge_trending || 'டிரெண்டிங் (TRENDING)';
+    const trendingText = dict.badge_trending || 'டிரெண்டிங்';
     const postDateText = currentLang === 'ta' ? (post.date_ta || '') : (post.date_en || post.date_ta || '');
 
-    const trendingBadge = isTrending ? `
-      <div class="badge-trending">
-        <span class="flame-icon">🔥</span>
-        <span>${trendingText}</span>
-      </div>
-    ` : '';
-
     card.innerHTML = `
-      ${trendingBadge}
-      <img src="${escapeHtml(post.imageUrl)}" alt="Instagram Post ${index + 1}" loading="lazy">
-      
-      <!-- Desktop Hover Overlay -->
-      <div class="insta-hover-overlay">
-        <span class="insta-corner-icon">📸</span>
-        <p>${escapeHtml(caption)}</p>
-        <span class="insta-tag">${escapeHtml(post.tags || '#TVKJothiNagar')}</span>
-        <div class="insta-post-meta-strip">
-          <span>❤️ ${post.likes || '1.8k'}</span>
-          <span>💬 ${post.comments || '210'}</span>
-          ${postDateText ? `<span>📅 ${postDateText}</span>` : ''}
+      <!-- Card Top Bar: Instagram Header -->
+      <div class="insta-card-header">
+        <div class="insta-card-author">
+          <img src="img/icons/WHISTLE-BADGE.png" alt="TVK" class="insta-mini-avatar">
+          <div class="insta-author-meta">
+            <span class="insta-author-name">jodhinagartvk <span class="verified-badge-mini">✓</span></span>
+            <span class="insta-author-sub">${postDateText ? `📅 ${postDateText}` : '@jodhinagartvk'}</span>
+          </div>
         </div>
-        <div style="display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 8px; flex-wrap: wrap;">
-          <a href="${escapeHtml(post.url || INSTAGRAM_CONFIG.profileUrl)}" target="_blank" rel="noopener" class="insta-post-link">
-            ${viewBtnText}
-          </a>
+        <div class="insta-card-pill-wrap">
+          ${isTrending ? `<span class="badge-trending-pill"><span class="flame-icon">🔥</span> ${trendingText}</span>` : ''}
+          ${isReel ? `<span class="badge-reel-pill">▶ Reel</span>` : ''}
+        </div>
+      </div>
+
+      <!-- Card Media Container -->
+      <div class="insta-media-wrapper">
+        <img src="${escapeHtml(post.imageUrl)}" alt="Instagram Post ${index + 1}" loading="lazy">
+        <div class="insta-media-overlay">
+          <span class="insta-overlay-view-btn">${viewBtnText}</span>
+        </div>
+      </div>
+
+      <!-- Card Bottom Bar: Stats, Caption & Quick Edit -->
+      <div class="insta-card-info">
+        <div class="insta-card-meta-line">
+          <div class="insta-stats-group">
+            <span class="insta-stat-item">❤️ ${post.likes || '4.8k'}</span>
+            <span class="insta-stat-item">💬 ${post.comments || '480'}</span>
+          </div>
           <button type="button" class="btn-action-small card-quick-edit-btn" onclick="openInstaManagerModal('${post.id}')" title="Edit this post">
             ✏️
           </button>
         </div>
-      </div>
-
-      <!-- Mobile Native Caption Strip (Always visible on mobile) -->
-      <div class="insta-mobile-caption-box">
-        <p class="insta-mobile-text">${escapeHtml(caption)}</p>
-        <div class="insta-mobile-footer">
-          <span class="insta-mobile-tags">${escapeHtml(post.tags || '#TVKJothiNagar')}</span>
-          <span class="insta-mobile-likes">❤️ ${post.likes || '1.8k'}</span>
-          ${postDateText ? `<span style="opacity: 0.9;">📅 ${postDateText}</span>` : ''}
-        </div>
+        <p class="insta-card-caption-text">${escapeHtml(caption)}</p>
+        <span class="insta-card-tag-text">${escapeHtml(post.tags || '#TVKJothiNagar #ThalapathyVijay')}</span>
       </div>
     `;
 
