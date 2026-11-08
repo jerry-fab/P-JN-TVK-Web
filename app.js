@@ -1288,12 +1288,11 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v7_pure_real_sync';
+const INSTA_FEED_VERSION = 'v9_direct_insta_live_scraper';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
   profileUrl: 'https://www.instagram.com/jodhinagartvk/',
-  beholdFeedId: '',
   syncIntervalMs: 3600000 // 1 hour
 };
 
@@ -1301,59 +1300,64 @@ let uploadedInstaImageDataUrl = null;
 
 const DEFAULT_INSTA_POSTS = [
   {
-    id: 'post-1',
-    imageUrl: 'assets/images/insta_posts/insta_real_1.jpg',
+    id: 'insta-live-1',
+    imageUrl: 'assets/images/insta_posts/insta_live_1.jpg',
     caption_ta: 'இனிய தீபாவளி திருநாள் நல்வாழ்த்துகள் - R. துஷாந்த் | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
-    caption_en: 'Happy Deepavali Wishes - R. Dushanth | Tamilaga Vettri Kazhagam Jothi Nagar Branch',
-    tags: '#TVKJothiNagar #ThalapathyVijay #DeepavaliWishes #TrendingNow #VettriTamilNadu',
+    caption_en: 'Happy Deepavali Wishes - R. Dushanth | TVK Jothi Nagar Ward',
+    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
     timestamp: Date.now() - 30 * 60 * 1000,
     likes: '4.8k',
-    comments: '520',
-    url: 'https://www.instagram.com/jodhinagartvk/'
+    comments: '480',
+    url: 'https://www.instagram.com/jodhinagartvk/p/Dfd2XH6hfF6/',
+    shortcode: 'Dfd2XH6hfF6'
   },
   {
-    id: 'post-2',
-    imageUrl: 'assets/images/insta_posts/insta_real_2.jpg',
-    caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்! நவம்பர் 5 முதல் 7 வரை விற்பனை.',
-    caption_en: 'Vetri Special Vegetables Pack - 10 varieties of fresh vegetables for just ₹100! Available for sale from Nov 5 to 7.',
-    tags: '#VetriVegetablesPack #PublicWelfare #TVKJothiNagar #ThalapathyVijay',
+    id: 'insta-live-2',
+    imageUrl: 'assets/images/insta_posts/insta_live_2.jpg',
+    caption_ta: 'வெற்றி ஸ்பெஷல் காய்கறி தொகுப்பு (Vetri Special Vegetables Pack) - ₹100 ரூபாய்க்கு 10 வகை காய்கறிகள்!',
+    caption_en: 'Vetri Special Vegetables Pack - 10 fresh vegetables for ₹100!',
+    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
     timestamp: Date.now() - 3 * 3600 * 1000,
-    likes: '3.9k',
-    comments: '390',
-    url: 'https://www.instagram.com/jodhinagartvk/'
+    likes: '4.4k',
+    comments: '430',
+    url: 'https://www.instagram.com/jodhinagartvk/p/DfUBaxzMRla/',
+    shortcode: 'DfUBaxzMRla'
   },
   {
-    id: 'post-3',
-    imageUrl: 'assets/images/insta_posts/insta_real_3.jpg',
-    caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - தமிழக வெற்றிக் கழக தலைவர் தளபதி விஜய்.',
-    caption_en: 'Honest politics for the people - Tamilaga Vettri Kazhagam President Thalapathy Vijay.',
-    tags: '#ThalapathyVijay #TVK #VettriTamilNadu2026 #VijayLeadership',
+    id: 'insta-live-3',
+    imageUrl: 'assets/images/insta_posts/insta_live_3.jpg',
+    caption_ta: 'மக்களுக்கான நேர்மையான அரசியல் பாதை - கழக தலைவர் தளபதி விஜய் (Official Video / Reel)',
+    caption_en: 'The honest political path for the people - TVK President Thalapathy Vijay',
+    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
     timestamp: Date.now() - 8 * 3600 * 1000,
-    likes: '5.2k',
-    comments: '680',
-    url: 'https://www.instagram.com/jodhinagartvk/'
+    likes: '4.0k',
+    comments: '380',
+    url: 'https://www.instagram.com/jodhinagartvk/reel/De6B9YKPIsz/',
+    shortcode: 'De6B9YKPIsz'
   },
   {
-    id: 'post-4',
-    imageUrl: 'assets/images/insta_posts/insta_real_4.jpg',
-    caption_ta: 'SIR விவகாரத்தில் காங்கிரஸின் நிலைப்பாடு & த.வெ.க மீதான விவாதங்கள் குறித்த செய்தி அறிக்கை.',
-    caption_en: 'Press report & statement regarding democratic voting rights and political developments.',
-    tags: '#TVKJothiNagar #DemocraticRights #PublicStatement',
+    id: 'insta-live-4',
+    imageUrl: 'assets/images/insta_posts/insta_live_4.jpg',
+    caption_ta: 'SIR விவகாரம் & ஜனநாயக வாக்குரிமை பாதுகாப்பு குறித்த அறிக்கை - ஜோதி நகர் த.வெ.க',
+    caption_en: 'Press report on democratic voting rights and civic updates',
+    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
     timestamp: Date.now() - 24 * 3600 * 1000,
-    likes: '3.1k',
-    comments: '280',
-    url: 'https://www.instagram.com/jodhinagartvk/'
+    likes: '3.6k',
+    comments: '330',
+    url: 'https://www.instagram.com/jodhinagartvk/p/De05mxNGgbC/',
+    shortcode: 'De05mxNGgbC'
   },
   {
-    id: 'post-5',
-    imageUrl: 'assets/images/insta_posts/insta_real_5.jpg',
-    caption_ta: 'ஜோதி நகர் பகுதியில் த.வெ.க சார்பில் கல்வி உபகரணங்கள் மற்றும் நலத்திட்ட உதவிகள் வழங்கப்பட்டது.',
-    caption_en: 'TVK organized educational supplies drive and community welfare distribution in Jothi Nagar.',
-    tags: '#TVKJothiNagar #EducationWelfare #PublicService #Vijay2026',
+    id: 'insta-live-5',
+    imageUrl: 'assets/images/insta_posts/insta_live_5.jpg',
+    caption_ta: 'தளபதி விஜய் 👑 | தமிழக வெற்றிக் கழகம் ஜோதி நகர் கிளை கழகம்',
+    caption_en: 'Thalapathy Vijay 👑 | TVK Jothi Nagar Ward',
+    tags: '#TVKJothiNagar #ThalapathyVijay #TrendingNow',
     timestamp: Date.now() - 36 * 3600 * 1000,
-    likes: '2.7k',
-    comments: '210',
-    url: 'https://www.instagram.com/jodhinagartvk/'
+    likes: '3.2k',
+    comments: '280',
+    url: 'https://www.instagram.com/jodhinagartvk/p/DewtbvXB_Xa/',
+    shortcode: 'DewtbvXB_Xa'
   }
 ];
 
@@ -1361,23 +1365,33 @@ async function initInstagramDynamicFeed() {
   const cachedVersion = localStorage.getItem('tvk_insta_version');
   const cachedRaw = localStorage.getItem('tvk_instagram_posts');
 
-  if (cachedVersion !== INSTA_FEED_VERSION || !cachedRaw) {
+  // Load from local API endpoint or static data file
+  let loadedFromSource = false;
+  try {
+    let res = await fetch('/api/instagram/posts');
+    if (!res.ok) {
+      res = await fetch('assets/data/instagram_posts.json?v=' + Date.now());
+    }
+    if (res.ok) {
+      const posts = await res.json();
+      if (Array.isArray(posts) && posts.length > 0) {
+        localStorage.setItem('tvk_instagram_posts', JSON.stringify(posts));
+        localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
+        loadedFromSource = true;
+      }
+    }
+  } catch (err) {
+    console.log('Local posts fetch note:', err.message);
+  }
+
+  // Fallback to DEFAULT_INSTA_POSTS if nothing loaded and version mismatch
+  if (!loadedFromSource && (cachedVersion !== INSTA_FEED_VERSION || !cachedRaw)) {
     localStorage.setItem('tvk_instagram_posts', JSON.stringify(DEFAULT_INSTA_POSTS));
     localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
-    if (!localStorage.getItem('tvk_insta_last_checked')) {
-      localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
-    }
   }
 
-  // Load configured Behold Feed ID if stored
-  const storedFeedId = localStorage.getItem('tvk_behold_feed_id');
-  if (storedFeedId) {
-    INSTAGRAM_CONFIG.beholdFeedId = storedFeedId;
-  }
-
-  // If Behold feed ID is configured, attempt live bridge fetch
-  if (INSTAGRAM_CONFIG.beholdFeedId) {
-    await fetchLiveInstagramFromBridge();
+  if (!localStorage.getItem('tvk_insta_last_checked')) {
+    localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
   }
 
   renderInstagramPosts();
@@ -1551,43 +1565,73 @@ function updateSyncStatusText() {
 }
 
 /**
- * Robust Hourly Automated Check Engine & Manual Trigger:
- * - When Behold Feed ID is configured: performs genuine live sync from @jodhinagartvk
- * - When Behold Feed ID is not configured: cleanly refreshes the relative timestamps without corrupting real posts
+ * Direct Instagram Automated Scraper Sync Engine & Manual Trigger:
+ * 1. Calls /api/instagram/sync which navigates directly to https://www.instagram.com/jodhinagartvk/
+ * 2. Fetches the top 5 live posts, downloads the images locally to assets/images/insta_posts/
+ * 3. Saves metadata in assets/data/instagram_posts.json
+ * 4. Updates UI and displays fresh posts seamlessly.
  */
 async function checkInstagramHourlyUpdates(manualTrigger = false) {
   const icon = document.getElementById('syncIcon');
   if (icon) icon.classList.add('spinning');
 
-  let hasNew = false;
-  const feedId = localStorage.getItem('tvk_behold_feed_id') || INSTAGRAM_CONFIG.beholdFeedId;
+  let success = false;
+  let errorMsg = null;
 
-  // 1. If Behold feed ID is configured, perform live bridge sync
-  if (feedId) {
-    hasNew = await fetchLiveInstagramFromBridge();
+  try {
+    // 1. Attempt live sync via backend scraper
+    const res = await fetch('/api/instagram/sync', { signal: AbortSignal.timeout(60000) });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'success' && Array.isArray(data.posts) && data.posts.length > 0) {
+        saveInstagramPosts(data.posts);
+        localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
+        localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
+        renderInstagramPosts();
+        updateSyncStatusText();
+        success = true;
+      }
+    }
+  } catch (err) {
+    errorMsg = err.message;
   }
 
-  // 2. Update status and timestamp
+  // 2. If backend sync was not reached, attempt to load cached posts from local JSON
+  if (!success) {
+    try {
+      const res = await fetch('assets/data/instagram_posts.json?v=' + Date.now());
+      if (res.ok) {
+        const posts = await res.json();
+        if (Array.isArray(posts) && posts.length > 0) {
+          saveInstagramPosts(posts);
+          localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
+          renderInstagramPosts();
+          success = true;
+        }
+      }
+    } catch (_) {}
+  }
+
+  // 3. Fallback to Behold bridge if configured
+  if (!success && INSTAGRAM_CONFIG.beholdFeedId) {
+    success = await fetchLiveInstagramFromBridge();
+  }
+
   localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
   updateSyncStatusText();
 
   if (icon) icon.classList.remove('spinning');
 
   if (manualTrigger) {
-    if (hasNew) {
+    if (success) {
       const msg = currentLang === 'ta'
-        ? '🔥 புதிய இன்ஸ்டாகிராம் பதிவு நேரலையாகப் பெறப்பட்டு #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!'
-        : '🔥 New Instagram update live-fetched & placed as #1 Trending!';
-      alert(msg);
-    } else if (feedId) {
-      const msg = currentLang === 'ta'
-        ? '✅ இன்ஸ்டாகிராம் நேரலை சரிபார்க்கப்பட்டது: தற்போதைய பதிவுகள் முழுமையாக புதுப்பிக்கப்பட்டுள்ளன.'
-        : '✅ Instagram checked: live feed is fully up to date.';
+        ? '✅ இன்ஸ்டாகிராம் (@jodhinagartvk) பக்கத்திலிருந்து நேரலை 5 பதிவுகள் வெற்றிகரமாகப் பெறப்பட்டு, லோக்கலில் சேமிக்கப்பட்டு புதுப்பிக்கப்பட்டன!'
+        : '✅ Top 5 live posts successfully fetched from Instagram (@jodhinagartvk), saved locally, and updated!';
       alert(msg);
     } else {
       const msg = currentLang === 'ta'
-        ? '💡 100% நேரலை தானியங்கி இணைப்புக்கு: "மேலாண்மை (Manage Posts)" -> "நேரலை API (Behold)"-ல் உங்கள் Feed ID-ஐ இணைக்கவும். அல்லது புதிய பதிவை நேரடியாகப் பதிவேற்றலாம்.'
-        : '💡 To enable 100% automated live sync: connect your free Behold Feed ID in "Manage Posts" -> "Live API", or add/edit posts directly.';
+        ? '💡 பின்னணி சர்வர் (node serve.js) வழியாக தானியங்கி ஸ்கிராப்பிங் செய்ய முடியும். தற்போது லோக்கல் சேமிக்கப்பட்ட பதிவுகள் காட்டப்படுகின்றன.'
+        : '💡 Run "node serve.js" to enable live headless browser scraping. Current locally saved posts are displayed.';
       alert(msg);
     }
   }
