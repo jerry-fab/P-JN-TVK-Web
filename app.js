@@ -1288,7 +1288,7 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v6_real_posts';
+const INSTA_FEED_VERSION = 'v7_pure_real_sync';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
@@ -1336,9 +1336,9 @@ const DEFAULT_INSTA_POSTS = [
   {
     id: 'post-4',
     imageUrl: 'assets/images/insta_posts/insta_real_4.jpg',
-    caption_ta: 'SIR விவகாரத்தில் மக்களின் வாக்குரிமையைப் பாதுகாக்க குடியரசுத் தலைவரிடம் த.வெ.க நாடாளுமன்ற உறுப்பினர்கள் மனு சமர்ப்பிப்பு!',
-    caption_en: 'TVK Parliamentary delegation submits memorandum to the Hon President of India to safeguard citizen voting rights in the SIR issue.',
-    tags: '#Democracy #VotingRights #TVKAction #PresidentOfIndia',
+    caption_ta: 'SIR விவகாரத்தில் காங்கிரஸின் நிலைப்பாடு & த.வெ.க மீதான விவாதங்கள் குறித்த செய்தி அறிக்கை.',
+    caption_en: 'Press report & statement regarding democratic voting rights and political developments.',
+    tags: '#TVKJothiNagar #DemocraticRights #PublicStatement',
     timestamp: Date.now() - 24 * 3600 * 1000,
     likes: '3.1k',
     comments: '280',
@@ -1354,49 +1354,6 @@ const DEFAULT_INSTA_POSTS = [
     likes: '2.7k',
     comments: '210',
     url: 'https://www.instagram.com/jodhinagartvk/'
-  }
-];
-
-const UPCOMING_POST_POOL = [
-  {
-    imageUrl: 'assets/images/vijay.jpg',
-    caption_ta: 'ஜோதி நகர் வார்டு மக்களின் குடிநீர் தேவையை தீர்க்க புதிய ஆழ்துளை கிணறு மற்றும் விநியோக சீரமைப்பு திட்டம்!',
-    caption_en: 'New drinking water pipeline and borewell overhaul project launched for Jothi Nagar residents!',
-    tags: '#WaterAction #TVKJothiNagar #VijayLeadership',
-    likes: '2.9k',
-    comments: '350'
-  },
-  {
-    imageUrl: 'assets/images/drainage_issue.jpg',
-    caption_ta: 'மழைக்கால வெள்ளத் தடுப்பு மற்றும் கழிவுநீர் வடிகால் தூய்மைப் பணியில் களமிறங்கிய த.வெ.க ஜோதி நகர் இளைஞர்கள்!',
-    caption_en: 'TVK Jothi Nagar Youth Brigade conducting stormwater drainage desilting and sanitation clearance!',
-    tags: '#MonsoonAction #YouthBrigade #TVKCivic',
-    likes: '2.3k',
-    comments: '240'
-  },
-  {
-    imageUrl: 'assets/images/district_secretary_rvs.jpg',
-    caption_ta: 'தஞ்சை மத்திய மாவட்ட த.வெ.க வழிகாட்டலில் ஜோதி நகர் பள்ளி மாணவர்களுக்கு இலவச கல்வி உபகரணங்கள் வழங்கப்பட்டது.',
-    caption_en: 'Free educational learning supplies distributed to ward school students under TVK Thanjavur Central District guidance.',
-    tags: '#EducationFirst #TVKService #Thanjavur',
-    likes: '2.6k',
-    comments: '275'
-  },
-  {
-    imageUrl: 'assets/images/garbage_issue.jpg',
-    caption_ta: 'ஜோதி நகர் குடியிருப்பு பகுதிகளில் குப்பைக் கழிவுகள் தேங்காமல் உடனுக்குடன் அகற்ற மாநகராட்சி தூய்மைப் பணியாளர்களுடன் கூட்டு களப்பணி.',
-    caption_en: 'Joint sanitation drive with municipal staff ensuring zero solid waste accumulation in Jothi Nagar neighborhoods.',
-    tags: '#CleanJothiNagar #CivicDuty #TVKAction',
-    likes: '2.0k',
-    comments: '190'
-  },
-  {
-    imageUrl: 'assets/images/ward_jothinagar_team.jpg',
-    caption_ta: 'ஜோதி நகர் பகுதி இளைஞர்களுக்கான விளையாட்டு மற்றும் உடற்பயிற்சி வசதிகளை மேம்படுத்த வார்டு குழு கலந்தாய்வு.',
-    caption_en: 'Jothi Nagar Ward Committee meeting to develop sports and youth fitness facilities in the neighborhood.',
-    tags: '#YouthFitness #CommunityBuilding #TVKYouth',
-    likes: '2.2k',
-    comments: '210'
   }
 ];
 
@@ -1595,9 +1552,8 @@ function updateSyncStatusText() {
 
 /**
  * Robust Hourly Automated Check Engine & Manual Trigger:
- * - Always rotates to the next fresh update from UPCOMING_POST_POOL
- * - Never gets stuck on duplicate caption check
- * - Connects to Behold live bridge if Feed ID is set
+ * - When Behold Feed ID is configured: performs genuine live sync from @jodhinagartvk
+ * - When Behold Feed ID is not configured: cleanly refreshes the relative timestamps without corrupting real posts
  */
 async function checkInstagramHourlyUpdates(manualTrigger = false) {
   const icon = document.getElementById('syncIcon');
@@ -1606,62 +1562,34 @@ async function checkInstagramHourlyUpdates(manualTrigger = false) {
   let hasNew = false;
   const feedId = localStorage.getItem('tvk_behold_feed_id') || INSTAGRAM_CONFIG.beholdFeedId;
 
-  // 1. If Behold feed ID is configured, try live bridge sync
+  // 1. If Behold feed ID is configured, perform live bridge sync
   if (feedId) {
     hasNew = await fetchLiveInstagramFromBridge();
   }
 
-  // 2. Fallback / simulated civic rotation
-  if (!hasNew) {
-    const posts = getStoredInstagramPosts();
-    const lastChecked = parseInt(localStorage.getItem('tvk_insta_last_checked') || '0', 10);
-    const isHourElapsed = (Date.now() - lastChecked >= INSTAGRAM_CONFIG.syncIntervalMs);
-
-    if (manualTrigger || isHourElapsed) {
-      // Find template in pool that is not identical to current post 0
-      let chosenTemplate = null;
-      for (let i = 0; i < UPCOMING_POST_POOL.length; i++) {
-        const candidate = UPCOMING_POST_POOL[i];
-        if (!posts[0] || posts[0].caption_ta !== candidate.caption_ta) {
-          chosenTemplate = candidate;
-          break;
-        }
-      }
-      if (!chosenTemplate) {
-        chosenTemplate = UPCOMING_POST_POOL[0];
-      }
-
-      const newPost = {
-        id: 'post-' + Date.now(),
-        imageUrl: chosenTemplate.imageUrl,
-        caption_ta: chosenTemplate.caption_ta,
-        caption_en: chosenTemplate.caption_en,
-        tags: chosenTemplate.tags,
-        timestamp: Date.now(),
-        likes: chosenTemplate.likes,
-        comments: chosenTemplate.comments,
-        url: INSTAGRAM_CONFIG.profileUrl
-      };
-
-      posts.unshift(newPost);
-      // Keep storage bounded (max 10 items)
-      const boundedPosts = posts.slice(0, 10);
-      saveInstagramPosts(boundedPosts);
-      hasNew = true;
-    }
-
-    localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
-    renderInstagramPosts();
-    updateSyncStatusText();
-  }
+  // 2. Update status and timestamp
+  localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
+  updateSyncStatusText();
 
   if (icon) icon.classList.remove('spinning');
 
   if (manualTrigger) {
-    const msg = currentLang === 'ta'
-      ? (hasNew ? '🔥 புதிய இன்ஸ்டாகிராம் பதிவு நேரலையாகப் புதுப்பிக்கப்பட்டு #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!' : '✅ இன்ஸ்டாகிராம் நேரலை சரிபார்க்கப்பட்டது: தற்போதைய பதிவுகள் முழுமையாக புதுப்பிக்கப்பட்டுள்ளன.')
-      : (hasNew ? '🔥 New Instagram update live-updated & placed as #1 Trending!' : '✅ Instagram checked: live feed is fully up to date.');
-    alert(msg);
+    if (hasNew) {
+      const msg = currentLang === 'ta'
+        ? '🔥 புதிய இன்ஸ்டாகிராம் பதிவு நேரலையாகப் பெறப்பட்டு #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!'
+        : '🔥 New Instagram update live-fetched & placed as #1 Trending!';
+      alert(msg);
+    } else if (feedId) {
+      const msg = currentLang === 'ta'
+        ? '✅ இன்ஸ்டாகிராம் நேரலை சரிபார்க்கப்பட்டது: தற்போதைய பதிவுகள் முழுமையாக புதுப்பிக்கப்பட்டுள்ளன.'
+        : '✅ Instagram checked: live feed is fully up to date.';
+      alert(msg);
+    } else {
+      const msg = currentLang === 'ta'
+        ? '💡 100% நேரலை தானியங்கி இணைப்புக்கு: "மேலாண்மை (Manage Posts)" -> "நேரலை API (Behold)"-ல் உங்கள் Feed ID-ஐ இணைக்கவும். அல்லது புதிய பதிவை நேரடியாகப் பதிவேற்றலாம்.'
+        : '💡 To enable 100% automated live sync: connect your free Behold Feed ID in "Manage Posts" -> "Live API", or add/edit posts directly.';
+      alert(msg);
+    }
   }
 }
 
