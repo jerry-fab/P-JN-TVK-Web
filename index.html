@@ -175,6 +175,10 @@
             <span class="sync-icon" id="syncIcon">🔄</span>
             <span data-i18n="btn_sync_now">இப்போது சரிபார்க்க (Check Now)</span>
           </button>
+          <button class="btn-add-post" id="btnAddInstaPost" onclick="openInstaManagerModal()" title="Manage or Add Top 5 Instagram Posts">
+            <span>➕</span>
+            <span data-i18n="btn_add_post">டாப் 5 பதிவுகள் மேலாண்மை (Manage Posts)</span>
+          </button>
         </div>
       </div>
 
@@ -721,9 +725,153 @@
     </div>
   </div>
 
+  <!-- Top 5 Instagram Posts Manager Modal -->
+  <div class="modal-overlay" id="instaManagerModal">
+    <div class="modal-content modal-post-compose">
+      <button class="btn-close-modal" onclick="closeInstaManagerModal()">✕</button>
+      
+      <div class="compose-header">
+        <span class="compose-icon">📸</span>
+        <h3 data-i18n="modal_add_post_title">இன்ஸ்டாகிராம் டாப் 5 பதிவுகள் மேலாண்மை</h3>
+        <p data-i18n="modal_add_post_desc">ஜோதி நகர் வார்டு தளத்தின் டாப் 5 இன்ஸ்டாகிராம் பதிவுகளை உடனுக்குடன் சேர்க்கலாம், திருத்தலாம் அல்லது புதிய பதிவை #1 டிரெண்டிங்கில் ஏற்றலாம்.</p>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="modal-tabs">
+        <button type="button" class="modal-tab-btn active" id="tabBtnAdd" onclick="switchInstaTab('add')">
+          <span data-i18n="tab_add_new">➕ புதிய பதிவு (#1 Trending)</span>
+        </button>
+        <button type="button" class="modal-tab-btn" id="tabBtnManage" onclick="switchInstaTab('manage')">
+          <span data-i18n="tab_manage_list">📋 டாப் 5 பதிவுகள் பட்டியல்</span>
+        </button>
+        <button type="button" class="modal-tab-btn" id="tabBtnBridge" onclick="switchInstaTab('bridge')">
+          <span data-i18n="tab_live_bridge">⚡ நேரலை API (Behold)</span>
+        </button>
+      </div>
+
+      <!-- TAB 1: ADD / EDIT POST FORM -->
+      <div class="modal-tab-pane active" id="paneAddPost">
+        <form id="instaPostForm" onsubmit="handleInstaPostFormSubmit(event)">
+          <input type="hidden" id="editingPostId" value="">
+          
+          <div class="form-group" style="margin-bottom: 14px;">
+            <label class="form-label">
+              <span data-i18n="label_post_image">புகைப்படம் (Image)</span> <span class="required">*</span>
+            </label>
+            
+            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 8px; flex-wrap: wrap;">
+              <input type="file" id="instaPhotoFileInput" accept="image/*" onchange="handleInstaPhotoUpload(event)" style="display: none;">
+              <button type="button" class="btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;" onclick="document.getElementById('instaPhotoFileInput').click()">
+                📁 கணினியிலிருந்து படம் தேர்வு (Upload File)
+              </button>
+              <span style="font-size: 0.78rem; color: var(--tvk-text-muted);">அல்லது மாதிரி படங்கள்:</span>
+            </div>
+
+            <!-- Quick Preset Chips -->
+            <div class="preset-chip-group">
+              <button type="button" class="preset-chip" onclick="selectPresetImage('assets/images/vijay.jpg')">தளபதி விஜய்</button>
+              <button type="button" class="preset-chip" onclick="selectPresetImage('assets/images/district_secretary_rvs.jpg')">மாவட்டச் செயலாளர்</button>
+              <button type="button" class="preset-chip" onclick="selectPresetImage('assets/images/ward_jothinagar_team.jpg')">வார்டு குழு</button>
+              <button type="button" class="preset-chip" onclick="selectPresetImage('assets/images/road_issue.jpg')">சாலை பணி</button>
+              <button type="button" class="preset-chip" onclick="selectPresetImage('assets/images/1.png')">நலத்திட்டம்</button>
+            </div>
+
+            <input type="text" id="instaPhotoUrlInput" class="form-control" placeholder="படத்தின் URL (Image URL) அல்லது மேலே உள்ள பொத்தான்களை அழுத்தவும்" style="margin-top: 8px;" oninput="updateInstaImagePreview(this.value)" required>
+
+            <div class="preview-box" id="instaImagePreviewBox" style="display: none; margin-top: 8px; text-align: center;">
+              <img id="instaImagePreview" src="" alt="Preview" style="max-height: 120px; border-radius: 8px; border: 1px solid var(--tvk-gold); object-fit: cover;">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="instaCaptionTa">
+              <span data-i18n="label_post_caption_ta">பதிவின் விவரம் - தமிழ் (Caption Tamil)</span> <span class="required">*</span>
+            </label>
+            <textarea id="instaCaptionTa" class="form-control" rows="2" placeholder="எ.கா: ஜோதி நகர் பகுதியில் த.வெ.க சார்பில் புதிய நலத்திட்ட உதவிகள் வழங்கப்பட்டது." required></textarea>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="instaCaptionEn">
+              <span data-i18n="label_post_caption_en">பதிவின் விவரம் - English (Optional)</span>
+            </label>
+            <textarea id="instaCaptionEn" class="form-control" rows="2" placeholder="e.g. TVK organized youth development and community welfare drive in Jothi Nagar."></textarea>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div class="form-group">
+              <label class="form-label" for="instaPostTags" data-i18n="label_post_tags">ஹேஷ்டேக் (Hashtags)</label>
+              <input type="text" id="instaPostTags" class="form-control" value="#TVKJothiNagar #ThalapathyVijay #TrendingNow">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="instaPostUrl" data-i18n="label_post_url">இன்ஸ்டா இணைப்பு (Post URL)</label>
+              <input type="url" id="instaPostUrl" class="form-control" value="https://www.instagram.com/jodhinagartvk/">
+            </div>
+          </div>
+
+          <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+            <div class="form-group">
+              <label class="form-label" for="instaPostLikes" data-i18n="label_post_likes">விருப்பங்கள் (Likes)</label>
+              <input type="text" id="instaPostLikes" class="form-control" value="3.2k">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="instaPostComments" data-i18n="label_post_comments">கருத்துகள் (Comments)</label>
+              <input type="text" id="instaPostComments" class="form-control" value="280">
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 10px; justify-content: flex-end;">
+            <button type="button" class="btn-secondary" onclick="closeInstaManagerModal()" data-i18n="btn_cancel">ரத்து செய்க</button>
+            <button type="submit" class="btn-primary" id="btnSubmitInstaPost" style="background: linear-gradient(135deg, var(--tvk-crimson-dark), #9a170a); border: 1px solid var(--tvk-gold); color: var(--tvk-gold);">
+              <span id="submitInstaBtnText" data-i18n="btn_publish_post">🚀 #1 டிரெண்டிங் பதிவாக சேர்க்க</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- TAB 2: MANAGE TOP 5 LIST -->
+      <div class="modal-tab-pane" id="paneManagePosts" style="display: none;">
+        <div class="manage-posts-list" id="managePostsListContainer">
+          <!-- Populated dynamically via renderManageInstaPostsList() -->
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--tvk-dark-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <button type="button" class="btn-secondary" style="font-size: 0.8rem; color: #ef4444;" onclick="resetInstagramPostsToDefault()">
+            <span data-i18n="btn_reset_defaults">🔄 பழைய நிலைக்கு மீட்டமை (Reset to Defaults)</span>
+          </button>
+          <button type="button" class="btn-primary" style="font-size: 0.8rem;" onclick="closeInstaManagerModal()">
+            <span>முடிந்தது (Done)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 3: LIVE API BRIDGE (BEHOLD) -->
+      <div class="modal-tab-pane" id="paneBridgeSettings" style="display: none;">
+        <div style="background: var(--tvk-dark-elevated); border: 1px solid var(--tvk-dark-border); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+          <h4 style="font-size: 0.95rem; color: var(--tvk-gold); margin-bottom: 8px;">🔗 Behold.so Live Bridge Engine</h4>
+          <p style="font-size: 0.82rem; color: var(--tvk-text-muted); line-height: 1.5; margin-bottom: 12px;">
+            இன்ஸ்டாகிராம் பக்கத்தின் (@jodhinagartvk) நேரலை பதிவுகளை தானாகப் பெற, உங்கள் இலவச <strong>Behold.so Feed ID</strong>-ஐ கீழே பதிவு செய்யலாம். (எ.கா: <code>abc123XYZ</code>).
+          </p>
+          <div class="form-group" style="margin-bottom: 12px;">
+            <label class="form-label" for="beholdFeedIdInput">Behold Feed ID:</label>
+            <input type="text" id="beholdFeedIdInput" class="form-control" placeholder="Feed ID (எ.கா: aB1cD2eF3...)">
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" class="btn-primary" style="font-size: 0.82rem;" onclick="saveBeholdFeedId()">
+              <span>💾 Feed ID சேமி & நேரலை சோதனை</span>
+            </button>
+            <button type="button" class="btn-secondary" style="font-size: 0.82rem;" onclick="clearBeholdFeedId()">
+              <span>அகற்று (Clear)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Leaflet Map JS (100% Free OpenStreetMap Engine) -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="app.js?v=2.2"></script>
+  <script src="app.js?v=2.3"></script>
 
   
 

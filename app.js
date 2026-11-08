@@ -129,15 +129,22 @@ const I18N = {
     top_gallery_desc: 'மக்கள் பணிக்காக தங்களை அர்ப்பணித்த கழகத்தின் வழிகாட்டிகள் மற்றும் ஜோதி நகர் களப்பணியாளர்கள்.',
     insta_sync_title: 'நேரலை சரிபார்ப்பு (Hourly Live Sync)',
     btn_sync_now: 'இப்போது சரிபார்க்க (Check Now)',
-    btn_add_post: 'புதிய பதிவு (Add Post)',
-    modal_add_post_title: 'புதிய இன்ஸ்டாகிராம் பதிவு சேர்க்க (Add New Post)',
-    modal_add_post_desc: 'ஜோதி நகர் வார்டு தளத்தில் புதிய நிகழ்வு அல்லது சாதனையைப் பதிவு செய்யுங்கள். இது உடனடியாக டிரெண்டிங் பதிவாக முதலிடம் பெறும்.',
-    label_post_image: 'புகைப்படம் தேர்ந்தெடுக்கவும் (Select Image)',
+    btn_add_post: 'டாப் 5 பதிவுகள் மேலாண்மை (Manage Posts)',
+    modal_add_post_title: 'இன்ஸ்டாகிராம் டாப் 5 பதிவுகள் மேலாண்மை',
+    modal_add_post_desc: 'ஜோதி நகர் வார்டு தளத்தின் டாப் 5 இன்ஸ்டாகிராம் பதிவுகளை உடனுக்குடன் சேர்க்கலாம், திருத்தலாம் அல்லது புதிய பதிவை #1 டிரெண்டிங்கில் ஏற்றலாம்.',
+    tab_add_new: '➕ புதிய பதிவு (#1 Trending)',
+    tab_manage_list: '📋 டாப் 5 பதிவுகள் பட்டியல்',
+    tab_live_bridge: '⚡ நேரலை API (Behold)',
+    label_post_image: 'புகைப்படம் (Image)',
     label_post_caption_ta: 'பதிவின் விவரம் - தமிழ் (Caption Tamil)',
     label_post_caption_en: 'பதிவின் விவரம் - English (Caption English)',
     label_post_tags: 'ஹேஷ்டேக் (Hashtags)',
+    label_post_url: 'இன்ஸ்டாகிராம் பதிவு இணைப்பு (Post URL)',
+    label_post_likes: 'விருப்பங்கள் (Likes)',
+    label_post_comments: 'கருத்துகள் (Comments)',
     btn_cancel: 'ரத்து செய்க',
-    btn_publish_post: '🚀 உடனடியாகப் பதிவேற்றுக (Publish as Trending)',
+    btn_publish_post: '🚀 #1 டிரெண்டிங் பதிவாக சேர்க்க',
+    btn_reset_defaults: '🔄 பழைய நிலைக்கு மீட்டமை (Reset to Defaults)',
     sync_just_now: 'கடைசி சரிபார்ப்பு: இப்போது (Checked: Just now)',
     sync_minutes_ago: 'கடைசி சரிபார்ப்பு: {m} நிமிடங்களுக்கு முன் | அடுத்தது: {next} நிமிடங்களில்',
     insta_card_5: 'ஜோதி நகர் வார்டு த.வெ.க நிர்வாகிகள் கள ஆய்வு & மக்கள் குறைதீர்ப்பு கலந்துரையாடல்.',
@@ -323,15 +330,22 @@ const I18N = {
     top_gallery_desc: 'Dedicated party mentors and grassroots frontline workers serving the citizens of Jothi Nagar.',
     insta_sync_title: 'Hourly Live Sync (நேரலை)',
     btn_sync_now: 'Check Now (சரிபார்க்க)',
-    btn_add_post: 'Add Post (புதிய பதிவு)',
-    modal_add_post_title: 'Add New Instagram Post',
-    modal_add_post_desc: 'Publish a new community event or initiative. It will instantly become the #1 Trending Post.',
-    label_post_image: 'Select Image',
+    btn_add_post: 'Manage Top 5 Posts (மேலாண்மை)',
+    modal_add_post_title: 'Manage Top 5 Instagram Posts',
+    modal_add_post_desc: 'Add, edit, or promote posts to the #1 Trending spot on the TVK Jothi Nagar portal.',
+    tab_add_new: '➕ Add New Post (#1)',
+    tab_manage_list: '📋 Top 5 Posts List',
+    tab_live_bridge: '⚡ Live API (Behold)',
+    label_post_image: 'Select Image / Photo',
     label_post_caption_ta: 'Caption (Tamil)',
     label_post_caption_en: 'Caption (English)',
     label_post_tags: 'Hashtags',
+    label_post_url: 'Instagram Post Link (URL)',
+    label_post_likes: 'Likes Count',
+    label_post_comments: 'Comments Count',
     btn_cancel: 'Cancel',
-    btn_publish_post: '🚀 Publish as Trending Post',
+    btn_publish_post: '🚀 Publish as #1 Trending Post',
+    btn_reset_defaults: '🔄 Reset to Default Posts',
     sync_just_now: 'Last checked: Just now',
     sync_minutes_ago: 'Last checked: {m}m ago | Next sync in: {next}m',
     insta_card_5: 'Jothi Nagar TVK ward office bearers field inspection and public grievance outreach meeting.',
@@ -1274,15 +1288,16 @@ function scrollToLeadership() {
  * ==========================================================================
  */
 
-const INSTA_FEED_VERSION = 'v4_live_behold';
+const INSTA_FEED_VERSION = 'v5_interactive_manager';
 
 const INSTAGRAM_CONFIG = {
   handle: 'jodhinagartvk',
   profileUrl: 'https://www.instagram.com/jodhinagartvk/',
-  // Paste your Behold Feed ID below (e.g., 'abc123XYZ') to auto-stream from @jodhinagartvk
   beholdFeedId: '',
   syncIntervalMs: 3600000 // 1 hour
 };
+
+let uploadedInstaImageDataUrl = null;
 
 const DEFAULT_INSTA_POSTS = [
   {
@@ -1388,21 +1403,22 @@ const UPCOMING_POST_POOL = [
 async function initInstagramDynamicFeed() {
   const cachedVersion = localStorage.getItem('tvk_insta_version');
   const cachedRaw = localStorage.getItem('tvk_instagram_posts');
-  let needsReset = false;
 
   if (cachedVersion !== INSTA_FEED_VERSION || !cachedRaw) {
-    needsReset = true;
-  } else if (cachedRaw.includes('1.png') || cachedRaw.includes('3.png') || cachedRaw.includes('4.png') || cachedRaw.includes('6.png')) {
-    needsReset = true;
-  }
-
-  if (needsReset) {
     localStorage.setItem('tvk_instagram_posts', JSON.stringify(DEFAULT_INSTA_POSTS));
     localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
-    localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
+    if (!localStorage.getItem('tvk_insta_last_checked')) {
+      localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
+    }
   }
 
-  // If Behold feed ID is configured, fetch live posts immediately on load
+  // Load configured Behold Feed ID if stored
+  const storedFeedId = localStorage.getItem('tvk_behold_feed_id');
+  if (storedFeedId) {
+    INSTAGRAM_CONFIG.beholdFeedId = storedFeedId;
+  }
+
+  // If Behold feed ID is configured, attempt live bridge fetch
   if (INSTAGRAM_CONFIG.beholdFeedId) {
     await fetchLiveInstagramFromBridge();
   }
@@ -1428,9 +1444,11 @@ async function initInstagramDynamicFeed() {
 }
 
 async function fetchLiveInstagramFromBridge() {
-  if (!INSTAGRAM_CONFIG.beholdFeedId) return false;
+  const feedId = localStorage.getItem('tvk_behold_feed_id') || INSTAGRAM_CONFIG.beholdFeedId;
+  if (!feedId) return false;
+
   try {
-    const res = await fetch(`https://feeds.behold.so/${INSTAGRAM_CONFIG.beholdFeedId}`);
+    const res = await fetch(`https://feeds.behold.so/${feedId}`);
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data) && data.length > 0) {
@@ -1485,7 +1503,7 @@ function renderInstagramPosts() {
 
     // Click anywhere on card opens post on Instagram
     card.onclick = (e) => {
-      if (!e.target.closest('a')) {
+      if (!e.target.closest('a') && !e.target.closest('.card-quick-edit-btn')) {
         window.open(post.url || INSTAGRAM_CONFIG.profileUrl, '_blank');
       }
     };
@@ -1517,9 +1535,14 @@ function renderInstagramPosts() {
           <span>❤️ ${post.likes || '1.8k'}</span>
           <span>💬 ${post.comments || '210'}</span>
         </div>
-        <a href="${escapeHtml(post.url || INSTAGRAM_CONFIG.profileUrl)}" target="_blank" rel="noopener" class="insta-post-link">
-          ${viewBtnText}
-        </a>
+        <div style="display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 8px; flex-wrap: wrap;">
+          <a href="${escapeHtml(post.url || INSTAGRAM_CONFIG.profileUrl)}" target="_blank" rel="noopener" class="insta-post-link">
+            ${viewBtnText}
+          </a>
+          <button type="button" class="btn-action-small card-quick-edit-btn" onclick="openInstaManagerModal('${post.id}')" title="Edit this post">
+            ✏️
+          </button>
+        </div>
       </div>
 
       <!-- Mobile Native Caption Strip (Always visible on mobile) -->
@@ -1570,14 +1593,21 @@ function updateSyncStatusText() {
   }
 }
 
+/**
+ * Robust Hourly Automated Check Engine & Manual Trigger:
+ * - Always rotates to the next fresh update from UPCOMING_POST_POOL
+ * - Never gets stuck on duplicate caption check
+ * - Connects to Behold live bridge if Feed ID is set
+ */
 async function checkInstagramHourlyUpdates(manualTrigger = false) {
   const icon = document.getElementById('syncIcon');
   if (icon) icon.classList.add('spinning');
 
   let hasNew = false;
+  const feedId = localStorage.getItem('tvk_behold_feed_id') || INSTAGRAM_CONFIG.beholdFeedId;
 
   // 1. If Behold feed ID is configured, try live bridge sync
-  if (INSTAGRAM_CONFIG.beholdFeedId) {
+  if (feedId) {
     hasNew = await fetchLiveInstagramFromBridge();
   }
 
@@ -1588,28 +1618,39 @@ async function checkInstagramHourlyUpdates(manualTrigger = false) {
     const isHourElapsed = (Date.now() - lastChecked >= INSTAGRAM_CONFIG.syncIntervalMs);
 
     if (manualTrigger || isHourElapsed) {
-      const poolIndex = Math.floor(Math.random() * UPCOMING_POST_POOL.length);
-      const template = UPCOMING_POST_POOL[poolIndex];
-
-      if (!posts[0] || posts[0].caption_ta !== template.caption_ta) {
-        const newPost = {
-          id: 'post-' + Date.now(),
-          imageUrl: template.imageUrl,
-          caption_ta: template.caption_ta,
-          caption_en: template.caption_en,
-          tags: template.tags,
-          timestamp: Date.now(),
-          likes: template.likes,
-          comments: template.comments,
-          url: INSTAGRAM_CONFIG.profileUrl
-        };
-        posts.unshift(newPost);
-        hasNew = true;
+      // Find template in pool that is not identical to current post 0
+      let chosenTemplate = null;
+      for (let i = 0; i < UPCOMING_POST_POOL.length; i++) {
+        const candidate = UPCOMING_POST_POOL[i];
+        if (!posts[0] || posts[0].caption_ta !== candidate.caption_ta) {
+          chosenTemplate = candidate;
+          break;
+        }
       }
+      if (!chosenTemplate) {
+        chosenTemplate = UPCOMING_POST_POOL[0];
+      }
+
+      const newPost = {
+        id: 'post-' + Date.now(),
+        imageUrl: chosenTemplate.imageUrl,
+        caption_ta: chosenTemplate.caption_ta,
+        caption_en: chosenTemplate.caption_en,
+        tags: chosenTemplate.tags,
+        timestamp: Date.now(),
+        likes: chosenTemplate.likes,
+        comments: chosenTemplate.comments,
+        url: INSTAGRAM_CONFIG.profileUrl
+      };
+
+      posts.unshift(newPost);
+      // Keep storage bounded (max 10 items)
+      const boundedPosts = posts.slice(0, 10);
+      saveInstagramPosts(boundedPosts);
+      hasNew = true;
     }
 
     localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
-    saveInstagramPosts(posts);
     renderInstagramPosts();
     updateSyncStatusText();
   }
@@ -1618,9 +1659,313 @@ async function checkInstagramHourlyUpdates(manualTrigger = false) {
 
   if (manualTrigger) {
     const msg = currentLang === 'ta'
-      ? (hasNew ? '🔥 புதிய இன்ஸ்டாகிராம் பதிவு நேரலையாகக் கண்டறியப்பட்டு #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!' : '✅ இன்ஸ்டாகிராம் நேரலை சரிபார்க்கப்பட்டது: தற்போதைய பதிவுகள் முழுமையாக புதுப்பிக்கப்பட்டுள்ளன.')
-      : (hasNew ? '🔥 New Instagram update live-detected & placed as #1 Trending!' : '✅ Instagram checked: live feed is fully up to date.');
+      ? (hasNew ? '🔥 புதிய இன்ஸ்டாகிராம் பதிவு நேரலையாகப் புதுப்பிக்கப்பட்டு #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!' : '✅ இன்ஸ்டாகிராம் நேரலை சரிபார்க்கப்பட்டது: தற்போதைய பதிவுகள் முழுமையாக புதுப்பிக்கப்பட்டுள்ளன.')
+      : (hasNew ? '🔥 New Instagram update live-updated & placed as #1 Trending!' : '✅ Instagram checked: live feed is fully up to date.');
     alert(msg);
   }
+}
+
+/**
+ * ==========================================================================
+ * TOP 5 INSTAGRAM POSTS MANAGER MODAL CONTROLLERS
+ * ==========================================================================
+ */
+function openInstaManagerModal(editingId = null) {
+  const modal = document.getElementById('instaManagerModal');
+  if (!modal) return;
+
+  uploadedInstaImageDataUrl = null;
+  const photoInput = document.getElementById('instaPhotoFileInput');
+  if (photoInput) photoInput.value = '';
+
+  const feedIdInput = document.getElementById('beholdFeedIdInput');
+  if (feedIdInput) {
+    feedIdInput.value = localStorage.getItem('tvk_behold_feed_id') || INSTAGRAM_CONFIG.beholdFeedId || '';
+  }
+
+  if (editingId) {
+    editInstaPost(editingId);
+  } else {
+    // Reset form for fresh addition
+    document.getElementById('instaPostForm')?.reset();
+    document.getElementById('editingPostId').value = '';
+    document.getElementById('instaImagePreviewBox').style.display = 'none';
+    const submitBtn = document.getElementById('submitInstaBtnText');
+    if (submitBtn) {
+      submitBtn.textContent = currentLang === 'ta' ? '🚀 #1 டிரெண்டிங் பதிவாக சேர்க்க' : '🚀 Publish as #1 Trending Post';
+    }
+    switchInstaTab('add');
+  }
+
+  renderManageInstaPostsList();
+  modal.classList.add('active');
+}
+
+function closeInstaManagerModal() {
+  const modal = document.getElementById('instaManagerModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function switchInstaTab(tabName) {
+  const tabAdd = document.getElementById('tabBtnAdd');
+  const tabManage = document.getElementById('tabBtnManage');
+  const tabBridge = document.getElementById('tabBtnBridge');
+
+  const paneAdd = document.getElementById('paneAddPost');
+  const paneManage = document.getElementById('paneManagePosts');
+  const paneBridge = document.getElementById('paneBridgeSettings');
+
+  [tabAdd, tabManage, tabBridge].forEach(btn => btn?.classList.remove('active'));
+  [paneAdd, paneManage, paneBridge].forEach(pane => {
+    if (pane) pane.style.display = 'none';
+  });
+
+  if (tabName === 'add') {
+    tabAdd?.classList.add('active');
+    if (paneAdd) paneAdd.style.display = 'block';
+  } else if (tabName === 'manage') {
+    tabManage?.classList.add('active');
+    if (paneManage) paneManage.style.display = 'block';
+    renderManageInstaPostsList();
+  } else if (tabName === 'bridge') {
+    tabBridge?.classList.add('active');
+    if (paneBridge) paneBridge.style.display = 'block';
+  }
+}
+
+function handleInstaPhotoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (file.size > 5 * 1024 * 1024) {
+    alert(currentLang === 'ta' ? 'படத்தின் அளவு 5MB-க்கு குறைவாக இருக்க வேண்டும்.' : 'Image size must be less than 5MB.');
+    event.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    uploadedInstaImageDataUrl = e.target.result;
+    const urlInput = document.getElementById('instaPhotoUrlInput');
+    if (urlInput) urlInput.value = uploadedInstaImageDataUrl;
+    updateInstaImagePreview(uploadedInstaImageDataUrl);
+  };
+  reader.readAsDataURL(file);
+}
+
+function selectPresetImage(path) {
+  uploadedInstaImageDataUrl = path;
+  const urlInput = document.getElementById('instaPhotoUrlInput');
+  if (urlInput) urlInput.value = path;
+  updateInstaImagePreview(path);
+}
+
+function updateInstaImagePreview(src) {
+  const box = document.getElementById('instaImagePreviewBox');
+  const img = document.getElementById('instaImagePreview');
+  if (!box || !img) return;
+
+  if (src && src.trim() !== '') {
+    img.src = src.trim();
+    box.style.display = 'block';
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+function handleInstaPostFormSubmit(event) {
+  event.preventDefault();
+
+  const editingId = document.getElementById('editingPostId').value;
+  const imageUrl = document.getElementById('instaPhotoUrlInput').value.trim();
+  const captionTa = document.getElementById('instaCaptionTa').value.trim();
+  const captionEn = document.getElementById('instaCaptionEn').value.trim() || captionTa;
+  const tags = document.getElementById('instaPostTags').value.trim() || '#TVKJothiNagar #ThalapathyVijay #TrendingNow';
+  const postUrl = document.getElementById('instaPostUrl').value.trim() || INSTAGRAM_CONFIG.profileUrl;
+  const likes = document.getElementById('instaPostLikes').value.trim() || '2.5k';
+  const comments = document.getElementById('instaPostComments').value.trim() || '240';
+
+  if (!imageUrl || !captionTa) {
+    alert(currentLang === 'ta' ? 'தயவுசெய்து படத்தையும் தமிழ் விவரத்தையும் உள்ளிடவும்.' : 'Please provide an image and Tamil caption.');
+    return;
+  }
+
+  const posts = getStoredInstagramPosts();
+
+  if (editingId) {
+    // Update existing post
+    const index = posts.findIndex(p => p.id === editingId);
+    if (index !== -1) {
+      posts[index].imageUrl = imageUrl;
+      posts[index].caption_ta = captionTa;
+      posts[index].caption_en = captionEn;
+      posts[index].tags = tags;
+      posts[index].url = postUrl;
+      posts[index].likes = likes;
+      posts[index].comments = comments;
+    }
+  } else {
+    // Add new post as #1 trending post
+    const newPost = {
+      id: 'post-' + Date.now(),
+      imageUrl: imageUrl,
+      caption_ta: captionTa,
+      caption_en: captionEn,
+      tags: tags,
+      timestamp: Date.now(),
+      likes: likes,
+      comments: comments,
+      url: postUrl
+    };
+    posts.unshift(newPost);
+  }
+
+  saveInstagramPosts(posts);
+  renderInstagramPosts();
+  renderManageInstaPostsList();
+  closeInstaManagerModal();
+
+  const alertMsg = currentLang === 'ta' 
+    ? (editingId ? '✅ பதிவு வெற்றிகரமாக புதுப்பிக்கப்பட்டது!' : '🎉 புதிய பதிவு வெற்றிகரமாக #1 டிரெண்டிங்கில் சேர்க்கப்பட்டது!') 
+    : (editingId ? '✅ Post updated successfully!' : '🎉 New post published to #1 Trending spot!');
+  alert(alertMsg);
+}
+
+function renderManageInstaPostsList() {
+  const container = document.getElementById('managePostsListContainer');
+  if (!container) return;
+
+  const posts = getStoredInstagramPosts();
+  container.innerHTML = '';
+
+  const displayList = posts.slice(0, 5);
+
+  displayList.forEach((post, index) => {
+    const isTrending = index === 0;
+    const item = document.createElement('div');
+    item.className = `manage-post-item ${isTrending ? 'trending-item' : ''}`;
+
+    const caption = currentLang === 'ta' ? (post.caption_ta || post.caption) : (post.caption_en || post.caption_ta);
+
+    item.innerHTML = `
+      <img src="${escapeHtml(post.imageUrl)}" class="manage-post-thumb" alt="Thumbnail">
+      <div class="manage-post-info">
+        <div class="manage-post-title">
+          ${isTrending ? '<span style="color: var(--tvk-gold); font-weight: 800;">[#1 Trending] </span>' : `[#${index + 1}] `}
+          ${escapeHtml(caption)}
+        </div>
+        <div class="manage-post-meta">
+          <span>❤️ ${post.likes || '1.8k'}</span>
+          <span>💬 ${post.comments || '180'}</span>
+          <span>📅 ${formatRelativeTime(post.timestamp)}</span>
+        </div>
+      </div>
+      <div class="manage-post-actions">
+        <button type="button" class="btn-action-small" onclick="editInstaPost('${post.id}')" title="Edit Post">
+          ✏️ Edit
+        </button>
+        ${!isTrending ? `
+          <button type="button" class="btn-action-small" onclick="moveInstaPostToTop('${post.id}')" title="Make this #1 Trending">
+            ⬆️ #1
+          </button>
+        ` : ''}
+        <button type="button" class="btn-action-small btn-danger-small" onclick="deleteInstaPost('${post.id}')" title="Delete Post">
+          🗑️
+        </button>
+      </div>
+    `;
+
+    container.appendChild(item);
+  });
+}
+
+function editInstaPost(id) {
+  const posts = getStoredInstagramPosts();
+  const post = posts.find(p => p.id === id);
+  if (!post) return;
+
+  switchInstaTab('add');
+
+  document.getElementById('editingPostId').value = post.id;
+  document.getElementById('instaPhotoUrlInput').value = post.imageUrl;
+  document.getElementById('instaCaptionTa').value = post.caption_ta || post.caption || '';
+  document.getElementById('instaCaptionEn').value = post.caption_en || '';
+  document.getElementById('instaPostTags').value = post.tags || '#TVKJothiNagar';
+  document.getElementById('instaPostUrl').value = post.url || INSTAGRAM_CONFIG.profileUrl;
+  document.getElementById('instaPostLikes').value = post.likes || '2.5k';
+  document.getElementById('instaPostComments').value = post.comments || '210';
+
+  updateInstaImagePreview(post.imageUrl);
+
+  const submitBtn = document.getElementById('submitInstaBtnText');
+  if (submitBtn) {
+    submitBtn.textContent = currentLang === 'ta' ? '💾 மாற்றங்களைச் சேமி (Save Changes)' : '💾 Save Changes';
+  }
+}
+
+function moveInstaPostToTop(id) {
+  const posts = getStoredInstagramPosts();
+  const index = posts.findIndex(p => p.id === id);
+  if (index > 0) {
+    const [selected] = posts.splice(index, 1);
+    selected.timestamp = Date.now(); // bump timestamp to now
+    posts.unshift(selected);
+    saveInstagramPosts(posts);
+    renderInstagramPosts();
+    renderManageInstaPostsList();
+  }
+}
+
+function deleteInstaPost(id) {
+  const confirmMsg = currentLang === 'ta' ? 'இந்தப் பதிவை நிச்சயமாக நீக்க விரும்புகிறீர்களா?' : 'Are you sure you want to delete this post?';
+  if (!confirm(confirmMsg)) return;
+
+  let posts = getStoredInstagramPosts();
+  posts = posts.filter(p => p.id !== id);
+
+  if (posts.length === 0) {
+    posts = [...DEFAULT_INSTA_POSTS];
+  }
+
+  saveInstagramPosts(posts);
+  renderInstagramPosts();
+  renderManageInstaPostsList();
+}
+
+function resetInstagramPostsToDefault() {
+  const confirmMsg = currentLang === 'ta' 
+    ? 'அனைத்து மாற்றங்களையும் நீக்கிவிட்டு இயல்புநிலை டாப் 5 பதிவுகளை மீட்டமைக்கவா?' 
+    : 'Reset all posts to the official default top 5 posts?';
+  if (!confirm(confirmMsg)) return;
+
+  saveInstagramPosts([...DEFAULT_INSTA_POSTS]);
+  localStorage.setItem('tvk_insta_version', INSTA_FEED_VERSION);
+  localStorage.setItem('tvk_insta_last_checked', String(Date.now()));
+  renderInstagramPosts();
+  renderManageInstaPostsList();
+  alert(currentLang === 'ta' ? '✅ இயல்புநிலை பதிவுகள் மீட்டமைக்கப்பட்டன!' : '✅ Default posts restored successfully!');
+}
+
+function saveBeholdFeedId() {
+  const input = document.getElementById('beholdFeedIdInput');
+  const feedId = input ? input.value.trim() : '';
+
+  if (!feedId) {
+    alert(currentLang === 'ta' ? 'தயவுசெய்து Feed ID-ஐ உள்ளிடவும்.' : 'Please enter a valid Behold Feed ID.');
+    return;
+  }
+
+  localStorage.setItem('tvk_behold_feed_id', feedId);
+  INSTAGRAM_CONFIG.beholdFeedId = feedId;
+  alert(currentLang === 'ta' ? 'Feed ID சேமிக்கப்பட்டது! நேரலை சோதனை தொடங்குகிறது...' : 'Feed ID saved! Testing live sync...');
+  checkInstagramHourlyUpdates(true);
+}
+
+function clearBeholdFeedId() {
+  localStorage.removeItem('tvk_behold_feed_id');
+  INSTAGRAM_CONFIG.beholdFeedId = '';
+  const input = document.getElementById('beholdFeedIdInput');
+  if (input) input.value = '';
+  alert(currentLang === 'ta' ? 'Behold Feed ID அகற்றப்பட்டது.' : 'Behold Feed ID cleared.');
 }
 
